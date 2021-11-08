@@ -11,8 +11,11 @@ import './App.scss';
 
 const Dashboard = lazy(() => import('./pages/DashBoard'));
 const Profile = lazy(() => import('./pages/Profile'));
+const TopPage = lazy(() => import('./pages/TopPage'));
+
 const Login = lazy(() => import('./pages/Login'));
 const Page500 = lazy(() => import('./pages/Page500'));
+
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
               </PrivateRouter>
               <PrivateRouter path="/profile" exact>
                 <Profile/>
+              </PrivateRouter>
+              <PrivateRouter path="/top-page" exact>
+                <TopPage/>
               </PrivateRouter>
             </Switch>
           </Page500>
