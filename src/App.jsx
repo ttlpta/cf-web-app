@@ -9,7 +9,8 @@ import reduxStore from './redux/store';
 
 import './App.scss';
 
-const Dashboard = lazy(() => import('./pages/DashBoard'));
+// const Dashboard = lazy(() => import('./pages/DashBoard'));
+const Home = lazy(() => import('./pages/Home'));
 const Profile = lazy(() => import('./pages/Profile'));
 const TopPage = lazy(() => import('./pages/TopPage'));
 
@@ -21,15 +22,13 @@ function App() {
   return (
     <Provider store={reduxStore}>
       <Router>
-        <Suspense fallback={Loading()}>
+        <Suspense fallback={<Loading />}>
           <Page500>
             <Switch>
               <Route path="/login" exact component={Login} />
-              <PrivateRouter path="/" exact>
-                <Dashboard/>
-              </PrivateRouter>
+              <Route path="/" component={Home} exact />
               <PrivateRouter path="/profile" exact>
-                <Profile/>
+                <Profile />
               </PrivateRouter>
               <PrivateRouter path="/top-page" exact>
                 <TopPage/>

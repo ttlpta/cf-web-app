@@ -1,0 +1,33 @@
+//Font
+$font-family: 'Noto Sans JP', sans-serif;
+$font-size-small: 13px;
+$font-size-base: 16px;
+$line-height-base: 1.5em;
+$font-weight-normal: 200;
+$font-weight-bold: 500;
+$font-weight-extra-bold: 700;
+
+//Color
+$primary-color: #145290;
+$red: #f00000;
+$white: #FFFFFF;
+$black: #000000;
+$background-color: #F1F5F8;
+$gray: #C4C4C4;
+
+//Link
+$active-link-color: $primary-color;
+$hover-link-color: $primary-color;
+$hover-link-color-secondary: #79B4EF;
+
+//Border
+$border-radius-base: 10px;
+$active-border-color: $primary-color;
+$hover-border-color: $primary-color;
+
+//Screen
+$phone: 480px;
+$tablet: 768px;
+$desktop: 1200px;
+
+$max-width: 1110px;
