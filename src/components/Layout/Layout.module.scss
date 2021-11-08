@@ -1,0 +1,196 @@
+@import '../../assets/styles/variable';
+
+.header {
+  position: fixed;
+  display: flex;
+  height: 80px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: $white;
+  box-shadow: 0px 3px 10px rgba($black, 0.1);
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+
+  &Logo {
+    display: block;
+    height: 50px;
+    margin: 0 80px;
+
+    img{
+      height: 100%;
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  height: 100%;
+
+  &Bar {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+  }
+
+  &Item {
+    position: relative;
+    font-size: 15px;
+    font-weight: $font-weight-extra-bold;
+    text-decoration: none;
+    margin-left: 40px;
+    color: $black;
+
+    &Active {
+      color: $active-link-color;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        border: 1px solid $active-border-color;
+        bottom: -4px;
+      }
+    }
+
+    &:hover {
+      color: $hover-link-color;
+    }
+  }
+}
+
+.buttonToggle {
+  position: relative;
+  width: 110px;
+  height: 100%;
+  background: $primary-color;
+  border: 0;
+  cursor: pointer;
+
+  &Bar{
+    display: block;
+    width: 44px;
+    height: 4px;
+    border: 0;
+    margin: 8px auto;
+    border-radius: 4px;
+    background-color: $white;
+    transform-origin: 5px;
+  }
+
+  &Active{
+    .buttonToggleBar{
+      transition: all .2s linear;
+
+      &:nth-child(1){
+        transform: rotate(45deg);
+      }
+      &:nth-child(2){
+        transform: translateX(200%);
+      }
+      &:nth-child(3){
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.footer{
+  width: 100%;
+  height: 280px;
+  background-color: $primary-color;
+
+  &Container{
+    display: block;
+    width: 100%;
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 48px 0 38px 0;
+  
+    .footerContent{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .footerLogo{
+        width: 245px;
+
+        img{
+          width: 100%;
+        }
+      }
+
+      .footerNav{
+        &Item{
+          position: relative;
+          font-size: 15px;
+          color: $white;
+          text-decoration: none;
+          margin: 0 20px;
+
+          &:first-child{
+            margin-left: 0;
+          }
+
+          &:last-child{
+            margin-right: 0;
+            &::after{
+              content: unset;
+            }
+          }
+
+          &::after{
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 16px;
+            background-color: $white;
+            right: -21px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+
+          &:hover{
+            color: $hover-link-color-secondary;
+          }
+
+          &.copyrightLink{
+            font-size: 13px;
+          }
+        }
+      }
+
+      .footerIcon{
+        display: flex;
+
+        a{
+          width: 30px;
+          height: 20px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          margin: 0 10px;
+          text-decoration: none;
+          
+          i{
+            color: $white;
+            font-size: 20px;
+          }
+        }
+      }
+
+    }
+    .footerDivider{
+      margin-top: 36px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(206, 204, 204, 0.5);
+    }
+
+    .copyrightText{
+      font-size: 13px;
+      color: $white;
+      margin-top: 25px;
+    }
+  }
+}
