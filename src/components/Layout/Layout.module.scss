@@ -10,7 +10,6 @@
   background: $white;
   box-shadow: 0px 3px 10px rgba($black, 0.1);
   align-items: center;
-  justify-content: space-between;
   z-index: 10;
 
   &Logo {
@@ -27,11 +26,12 @@
 .nav {
   display: flex;
   height: 100%;
+  flex: 1;
+  justify-content: center;
 
   &Bar {
     display: flex;
     align-items: center;
-    margin-right: 50px;
   }
 
   &Item {
@@ -96,6 +96,17 @@
   }
 }
 
+.locale{
+  display: flex;
+  background-color: transparent;
+  margin-right: 130px;
+  align-items: center;
+
+  span{
+    margin: 0 5px;
+  }
+}
+
 .footer{
   width: 100%;
   height: 280px;
@@ -106,7 +117,7 @@
     width: 100%;
     max-width: $max-width;
     margin: 0 auto;
-    padding: 48px 0 38px 0;
+    padding: 48px 0 18px 0;
   
     .footerContent{
       display: flex;
