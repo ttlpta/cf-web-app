@@ -1,39 +1,49 @@
-import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SwiperCore, { Pagination } from 'swiper';
+import SwiperCore, { Pagination, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import 'swiper/swiper.scss';
 import styles from './Slider.module.scss';
 
-SwiperCore.use([Pagination]);
+SwiperCore.use([Pagination, Thumbs]);
 
-const Slider = React.forwardRef((props, ref) => {
+const Slider = React.memo((props) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   const { items } = props;
   return (
-    <Swiper
-      itemRef={ref}
-      className={styles.swiper}
-      slidesPerView={2}
-      spaceBetween={55}
-      centeredSlides
-      pagination={{
-        clickable: true,
-        clickableClass: styles.pagination,
-        bulletClass: styles.bullet,
-        bulletActiveClass: styles.bulletActive,
-      }}
-    >
-      {items.map((source, index) => (
-        <SwiperSlide key={index} className={styles.item}>
-          {({ isNext, isPrev }) => (
-            <div className={clsx(styles.content, { [styles.next]: isNext, [styles.prev]: isPrev })}>
-              <img src={source.src} alt={source.alt} />
-            </div>
-          )}
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className={styles.wrapper}>
+      <Swiper
+        className={styles.swiperMain}
+        thumbs={{ swiper: thumbsSwiper, slideThumbActiveClass: styles.thumbActive }}
+        slidesPerView={1}
+      >
+        {items.map((source, index) => (
+          <SwiperSlide key={index} className={styles.item}>
+            <img src={source.src} alt={source.alt} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Swiper
+        className={styles.swiper}
+        onSwiper={setThumbsSwiper}
+        slidesPerView={4}
+        spaceBetween={25}
+        centeredSlides
+        pagination={{
+          clickable: true,
+          clickableClass: styles.pagination,
+          bulletClass: styles.bullet,
+          bulletActiveClass: styles.bulletActive,
+        }}
+      >
+        {items.map((source, index) => (
+          <SwiperSlide key={index} className={styles.item}>
+            <img src={source.src} alt={source.alt} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 });
 
