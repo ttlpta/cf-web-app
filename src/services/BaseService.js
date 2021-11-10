@@ -36,7 +36,7 @@ const axiosBaseQuery =
       }
       return result;
     } catch (err) {
-      console.error('Error:', { err });
+      // console.error('Error:', { err });
       if (!err.response) {
         // network error
         alert('Network Error');

@@ -19,7 +19,7 @@ export const companyApi = createApi({
       }),
       getNews: build.query({
         query: (params) => ({
-          url: API.TOP_NEWS,
+          url: API.COMPANY.TOP_NEWS,
           method: 'GET',
           data: null,
           params,
