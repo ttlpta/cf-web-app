@@ -40,11 +40,11 @@ const TopPage = () => {
     login_id: "mini01@gmail.com"
   });
 
-  const { data: scheduleData } = useGetSchedulesQuery({
+  const { data: scheduleData, isSuccess: isGetScheduleDataSuccess } = useGetSchedulesQuery({
     month: 1635699600000
   });
 
-  console.log("🚀 ~ TopPage ~ newsData", newsData)
+  // console.log("🚀 ~ TopPage ~ newsData", newsData)
   console.log("🚀 ~ TopPage ~ profileData", profileData);
   console.log("🚀 ~ TopPage ~ scheduleData", scheduleData)
 
@@ -92,6 +92,28 @@ const TopPage = () => {
     return null;
   }
 
+  const renderSchedule = () => {
+    if (isGetScheduleDataSuccess) {
+      return (
+        <div className="home__schedule">
+          <h2 className="home__schedule__title">SCHEDULE</h2>
+          <div className="home__schedule__content">
+            {scheduleData.data.schedules.map(item =>
+              <ScheduleItem
+                dateNumber={moment(+item.start_time).format("DD")}
+                name={item.name}
+                hour={moment(+item.start_time).format("HH:00")}
+              />)}
+          </div>
+          <Link to="/" className="home__schedule__viewmore">
+            View more
+          </Link>
+        </div>
+      )
+    }
+    return null;
+  }
+
 
 
   return (
@@ -113,18 +135,10 @@ const TopPage = () => {
       </div>
 
       {renderNews()}
+      {renderSchedule()}
 
 
-      <div className="home__schedule">
-        <h2 className="home__schedule__title">SCHEDULE</h2>
-        <div className="home__schedule__content">
-          <ScheduleItem />
-          <ScheduleItem />
-        </div>
-        <Link to="/" className="home__schedule__viewmore">
-          View more
-        </Link>
-      </div>
+
     </div>
   )
 }
