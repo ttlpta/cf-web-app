@@ -39,7 +39,7 @@ const axiosBaseQuery =
       // console.error('Error:', { err });
       if (!err.response) {
         // network error
-        alert('Network Error');
+        // alert('Network Error');
         throw err;
       }
 

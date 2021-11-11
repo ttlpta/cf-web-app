@@ -4,13 +4,13 @@ import axiosBaseQuery from './BaseService';
 
 export const companyApi = createApi({
   reducerPath: 'companyApi',
-  tagTypes: ['BANNER', 'NEWS', 'SCHEDULES'],
+  tagTypes: ['BANNER', 'NEWS', 'SCHEDULES', 'PROFILE'],
   baseQuery: axiosBaseQuery(),
   endpoints(build) {
     return {
       getTopPageBanners: build.query({
         query: (params) => ({
-          url: API.COMPANY.BANNERS,
+          url: API.TOP_PAGE.BANNERS,
           method: 'GET',
           data: null,
           params,
@@ -19,7 +19,7 @@ export const companyApi = createApi({
       }),
       getNews: build.query({
         query: (params) => ({
-          url: API.COMPANY.TOP_NEWS,
+          url: API.TOP_PAGE.TOP_NEWS,
           method: 'GET',
           data: null,
           params,
@@ -35,8 +35,18 @@ export const companyApi = createApi({
         }),
         providesTags: () => [{ type: 'SCHEDULES', id: 'LIST' }],
       }),
+      getTopPageProfile: build.query({
+        query: (params) => ({
+          url: API.TOP_PAGE.PROFILE,
+          method: 'GET',
+          data: null,
+          params,
+        }),
+        providesTags: () => [{ type: 'PROFILE', id: 'LIST' }],
+      }),
     };
   },
 });
 
-export const { useGetTopPageBannersQuery, useGetNewsQuery } = companyApi;
+export const { useGetTopPageBannersQuery, useGetNewsQuery, useGetTopPageProfileQuery, useGetSchedulesQuery } =
+  companyApi;
