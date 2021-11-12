@@ -1,0 +1,9 @@
+@mixin mainTitle{
+  font-size: 40px;
+  line-height: 1.25em;
+  font-weight: $font-weight-extra-bold;
+  color: $primary-color;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 30px;
+}

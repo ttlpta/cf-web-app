@@ -11,12 +11,13 @@ import './App.scss';
 
 // const Dashboard = lazy(() => import('./pages/DashBoard'));
 const Home = lazy(() => import('./pages/Home'));
+const Schedule = lazy(() => import('./pages/Schedule'));
+const ScheduleDetail = lazy(() => import('./pages/ScheduleDetail'));
 const Profile = lazy(() => import('./pages/Profile'));
 const TopPage = lazy(() => import('./pages/TopPage'));
 
 const Login = lazy(() => import('./pages/Login'));
 const Page500 = lazy(() => import('./pages/Page500'));
-
 
 function App() {
   return (
@@ -27,11 +28,13 @@ function App() {
             <Switch>
               <Route path="/login" exact component={Login} />
               <Route path="/" component={Home} exact />
+              <Route path="/schedules" component={Schedule} exact />
+              <Route path="/schedules/detail" component={ScheduleDetail} exact />
               <PrivateRouter path="/profile" exact>
                 <Profile />
               </PrivateRouter>
               <PrivateRouter path="/top-page" exact>
-                <TopPage/>
+                <TopPage />
               </PrivateRouter>
             </Switch>
           </Page500>

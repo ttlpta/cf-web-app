@@ -26,8 +26,15 @@ $active-border-color: $primary-color;
 $hover-border-color: $primary-color;
 
 //Screen
-$phone: 480px;
-$tablet: 768px;
-$desktop: 1200px;
+// 👆 Extra small screen / phone
+$screen-xs: 480px;
+// 👇 Small screen / tablet
+$screen-sm: 576px;
+// Medium screen / desktop
+$screen-md: 768px;
+// Large screen / wide desktop
+$screen-lg: 992px;
+// Extra large screen / full hd
+$screen-xl: 1200px;
 
 $max-width: 1110px;

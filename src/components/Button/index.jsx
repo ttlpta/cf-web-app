@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 
 const Button = React.memo((props) => {
-  const { title, type, className, titleClassName, iconClassName, children, ...rest } = props;
+  const { title, type, className, style, titleClassName, iconClassName, children, ...rest } = props;
   return (
     /* eslint-disable react/button-has-type */
-    <button type={type || 'button'} {...rest} className={clsx(styles.btn, className)}>
+    <button type={type || 'button'} {...rest} style={style} className={clsx(styles.btn, className)}>
       {children || (
         <>
           <span className={clsx(styles.icon, titleClassName)} />

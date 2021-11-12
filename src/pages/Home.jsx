@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Slider from '../components/Home/Slider';
 // import Button from '../components/Button';
-import NewItem from '../components/Home/NewItem';
-import ScheduleItem from '../components/Home/ScheduleItem';
+import NewItem from '../components/New/NewItem';
+import ScheduleItem from '../components/Schedule/ScheduleItem';
 
 export default function Home() {
   return (

@@ -1,0 +1,32 @@
+@import '../../assets/styles/variable';
+
+.wrapper{
+  display: flex;
+  width: 100%;
+  padding: 15px 80px;
+  
+  .item{
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    &:last-child{
+      .separator{
+        display: none;
+      }
+    }
+
+    .link{
+      color: $black;
+
+      a{
+        color: $black;
+        text-decoration: none;
+      }
+    }
+
+    .separator{
+      margin-left: 10px;
+    }
+  }
+}
