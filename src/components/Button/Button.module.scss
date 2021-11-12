@@ -1,0 +1,8 @@
+@import '../../assets/styles/variable';
+
+.btn{
+  border: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: $border-radius-base;
+}

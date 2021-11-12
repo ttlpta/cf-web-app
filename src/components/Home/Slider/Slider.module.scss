@@ -1,0 +1,76 @@
+@import '../../../assets/styles/variable';
+
+.swiperMain {
+  width: 100%;
+  height: 650px;
+
+  .item {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.swiper {
+  width: 100%;
+  padding: 80px 0;
+  padding-top: 20px;
+
+  .item {
+    position: relative;
+    width: 400px;
+    height: 230px;
+    border-radius: 20px;
+    background-color: rgba($gray, .5);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $gray;
+      border-radius: 20px;
+      opacity: 0.5;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+      text-align: center;
+    }
+  }
+
+  .thumbActive {
+    &::after {
+      content: unset;
+    }
+  }
+
+  .pagination {
+    position: absolute;
+    display: flex;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+  }
+
+  .bullet {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 10px;
+    background-color: $gray;
+    cursor: pointer;
+
+    &Active {
+      width: 10px;
+      height: 10px;
+      background-color: $primary-color;
+    }
+  }
+}
