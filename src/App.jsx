@@ -29,7 +29,7 @@ function App() {
               <Route path="/login" exact component={Login} />
               <Route path="/" component={Home} exact />
               <Route path="/schedules" component={Schedule} exact />
-              <Route path="/schedules/detail" component={ScheduleDetail} exact />
+              <Route path="/schedules/detail/:id" component={ScheduleDetail} exact />
               <PrivateRouter path="/profile" exact>
                 <Profile />
               </PrivateRouter>

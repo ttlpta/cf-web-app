@@ -33,6 +33,16 @@ export const companyApi = createApi({
           data: null,
           params,
         }),
+        keepUnusedDataFor: 0,
+        providesTags: () => [{ type: 'SCHEDULES', id: 'LIST' }],
+      }),
+      getSchedule: build.query({
+        query: (id) => ({
+          url: API.COMPANY.SCHEDULE(id),
+          method: 'GET',
+          data: null,
+          params: null,
+        }),
         providesTags: () => [{ type: 'SCHEDULES', id: 'LIST' }],
       }),
       getTopPageProfile: build.query({
@@ -48,5 +58,10 @@ export const companyApi = createApi({
   },
 });
 
-export const { useGetTopPageBannersQuery, useGetNewsQuery, useGetTopPageProfileQuery, useGetSchedulesQuery } =
-  companyApi;
+export const {
+  useGetTopPageBannersQuery,
+  useGetNewsQuery,
+  useGetTopPageProfileQuery,
+  useGetSchedulesQuery,
+  useGetScheduleQuery,
+} = companyApi;

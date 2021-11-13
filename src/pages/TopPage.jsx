@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-vars */
 import moment from 'moment';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Button from '../components/Button';
 import NewItem from '../components/New/NewItem';
 import ScheduleItem from '../components/Schedule/ScheduleItem';
@@ -13,6 +13,7 @@ import {
   useGetTopPageBannersQuery,
   useGetTopPageProfileQuery,
 } from '../services/CompanyService';
+import { userProfileSelector } from '../redux/slices/authSlice';
 
 // Need Spinner
 
@@ -23,6 +24,8 @@ const TopPage = () => {
     category: COMPANY.CAMPAIGN_CATEGORIES.EVENT,
     // artistId: 16777517
   });
+  const { email1: artisEmail } = useSelector(userProfileSelector);
+  console.log('artisEmail', artisEmail);
 
   const { data: bannersData } = useGetTopPageBannersQuery(
     { companyId: 1 },
@@ -43,8 +46,8 @@ const TopPage = () => {
   );
   const { data: newsData, isSuccess: isGetNewsDataSuccess } = useGetNewsQuery(getNewsQueryParams);
 
-  const { data: profileData } = useGetTopPageProfileQuery({
-    login_id: 'mini01@gmail.com',
+  const { data: profileData, isSuccess: isGetProfileDataSuccess } = useGetTopPageProfileQuery({
+    login_id: 'ha.hoang.thi+8@bluebelt.asia',
   });
 
   const { data: scheduleData, isSuccess: isGetScheduleDataSuccess } = useGetSchedulesQuery({
@@ -105,6 +108,7 @@ const TopPage = () => {
           <h2 className="home__schedule__title">SCHEDULE</h2>
           <div className="home__schedule__content">
             {scheduleData.data.schedules.map((item) => (
+              // @ts-ignore
               <ScheduleItem
                 dateNumber={moment(+item.start_time).format('DD')}
                 name={item.name}
@@ -121,9 +125,60 @@ const TopPage = () => {
     return null;
   };
 
+  const renderProfile = () => {
+    if (isGetProfileDataSuccess) {
+      const {
+        avatar_image = 'https://picsum.photos/600/700',
+        artist_name = '森保まどか',
+        nick_name = 'Madoka Moriyasu',
+        bio = 'Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+        dob = '3 September 2002',
+        height = '167.5cm',
+        city = 'Tokyo',
+        country = 'Japan',
+        hobby = 'Play basketball, draw, watch funny programs, dance cover',
+        blood_type = 1
+      } = profileData?.data?.artist || {};
+
+      const generalInfo = {
+        dob, height, city, country, blood_type, hobby
+      }
+
+      console.log('generalInfo', generalInfo);
+      const renderGeneralInfo =  () => Object.keys(generalInfo).map((key) => (
+        <div className="profile__info__item">
+          <p className="profile__info__item--title">{key}</p>
+          <p className="profile__info__item--content">{generalInfo[key]}</p>
+        </div>
+      ))
+
+      return (
+        <div className="home__profile">
+          <h2 className="home__profile__title">PROFILE</h2>
+          <div className="home__profile__content">
+            <div className="home__profile__picture">
+              <img src={avatar_image} alt="aaa" />
+            </div>
+            <div className="home__profile__information">
+              <h1 className="profile__info__name">{artist_name} </h1>
+              <h2 className="profile__info__subname">{nick_name} </h2>
+              <p className="profile__info__about">
+                {bio}
+              </p>
+              {renderGeneralInfo()}
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="home">
-      <Slider items={bannersData || []} />
+      <Slider
+        items={bannersData || []}
+      />
       <div className="home__user">
         <Button className="home__user--btn">
           <span className="home__user--btn__icon">
@@ -131,7 +186,8 @@ const TopPage = () => {
           </span>
           <span className="home__user--btn__title">プロフィール</span>
         </Button>
-        <Button className="home__user--btn">
+        <Button className="home__user--btn"
+        >
           <span className="home__user--btn__icon">
             <i className="icon-calendar" />
           </span>
@@ -141,6 +197,7 @@ const TopPage = () => {
 
       {renderNews()}
       {renderSchedule()}
+      {renderProfile()}
     </div>
   );
 };
