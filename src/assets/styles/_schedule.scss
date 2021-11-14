@@ -1,4 +1,6 @@
 .schedule{
+  padding: 20px;
+  
   background-color: #FFFCF8;
 
   &__breadcrumb{
@@ -27,6 +29,7 @@
       padding: 25px 130px;
 
       span{
+        font-size: 16px;
         margin-right: 45px;
       }
 
@@ -44,7 +47,7 @@
         flex: 1;
         align-items: center;
         justify-content: center;
-        height: 100px;
+        height: 120px;
         margin: 25px;
         background: $primary-color;
         box-shadow: 0px 10px 0px rgba(20, 82, 144, 0.15);

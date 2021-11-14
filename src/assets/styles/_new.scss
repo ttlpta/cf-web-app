@@ -1,0 +1,148 @@
+.new{
+  padding: 20px;
+  
+  &__breadcrumb{
+    font-size: 12px;
+    margin-bottom: 70px;
+  }
+
+  &__title{
+    @include mainTitle;
+    font-size: 55px;
+    margin-bottom: 0;
+
+    &__prefix{
+      color: $black;
+    }
+  }
+
+  &__subtitle{
+    @include mainTitle;
+    font-size: 17px;
+  }
+
+  &__divider{
+    border: 1px dashed $primary-color;
+    max-width: $max-width;
+    margin: 0 auto;
+  }
+
+  &__filter{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+
+    &__btn{
+      display: flex;
+      align-items: center;
+      padding: 25px 90px;
+
+      span{
+        font-size: 16px;
+        margin-right: 45px;
+      }
+
+      svg{
+        font-size: 32px;
+      }
+    }
+
+    &__list{
+      display: flex;
+      flex-flow: row wrap;
+
+      .filter__list--button{
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        height: 120px;
+        margin: 25px;
+        background: $primary-color;
+        box-shadow: 0px 10px 0px rgba(20, 82, 144, 0.15);
+        border-radius: 40px;
+        color: $white;
+        font-size: 25px;
+        font-weight: $font-weight-extra-bold;
+
+        i{
+          font-size: 50px;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+
+  &__list{
+    width: 100%;
+    max-width: $max-width;
+    margin: 0 auto;
+
+    &__item{
+      border-radius: 0 !important;
+
+      img{
+        border-radius: 0 !important;
+      }
+    }
+  }
+
+  &__detail{
+    width: 100%;
+    max-width: $max-width;
+    margin: 0 auto;
+
+    &__content{
+      width: 100%;
+      max-width: 846px;
+      margin: 0 auto;
+
+      .detail__header{
+        padding-bottom: 40px;
+        border-bottom: 1px dashed $primary-color;
+
+        &__time{
+          color: $primary-color;
+        }
+
+        &__title{
+          font-size: 55px;
+          color: $primary-color;
+          font-weight: $font-weight-normal;
+        }
+      }
+
+      .detail__content{
+        padding: 35px 0 40px 0;
+        border-bottom: 1px dashed $primary-color;
+
+        img{
+          width: 100%;
+          border-radius: 10px;
+          max-height: 450px;
+        }
+
+        &__btn{
+          margin-top: 30px;
+          text-align: center;
+        }
+      }
+
+      .detail__footer{
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+
+        &__btn{
+          font-size: 18px;
+          font-weight: $font-weight-extra-bold;
+          padding: 5px 40px;
+          background: #9ECBF7;
+          border: 1px solid #9ECBF7;
+          color: $white;
+        }
+      }
+    }
+  }
+}

@@ -11,6 +11,8 @@ import './App.scss';
 
 // const Dashboard = lazy(() => import('./pages/DashBoard'));
 const Home = lazy(() => import('./pages/Home'));
+const New = lazy(() => import('./pages/New'));
+const NewDetail = lazy(() => import('./pages/NewDetail'));
 const Schedule = lazy(() => import('./pages/Schedule'));
 const ScheduleDetail = lazy(() => import('./pages/ScheduleDetail'));
 const Profile = lazy(() => import('./pages/Profile'));
@@ -28,6 +30,8 @@ function App() {
             <Switch>
               <Route path="/login" exact component={Login} />
               <Route path="/" component={Home} exact />
+              <Route path="/news" component={New} exact />
+              <Route path="/news/detail" component={NewDetail} exact />
               <Route path="/schedules" component={Schedule} exact />
               <Route path="/schedules/detail/:id" component={ScheduleDetail} exact />
               <PrivateRouter path="/profile" exact>

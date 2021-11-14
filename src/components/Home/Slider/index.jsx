@@ -27,8 +27,14 @@ const Slider = React.memo((props) => {
       <Swiper
         className={styles.swiper}
         onSwiper={setThumbsSwiper}
-        slidesPerView={4}
-        spaceBetween={25}
+        slidesPerView={1.8}
+        spaceBetween={12}
+        breakpoints={{
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 25,
+          },
+        }}
         centeredSlides
         pagination={{
           clickable: true,

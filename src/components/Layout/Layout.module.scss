@@ -10,12 +10,13 @@
   background: $white;
   box-shadow: 0px 3px 10px rgba($black, 0.1);
   align-items: center;
+  justify-content: space-between;
   z-index: 10;
+  padding: 0 80px;
 
   &Logo {
     display: block;
     height: 50px;
-    margin: 0 80px;
 
     img{
       height: 100%;
@@ -29,9 +30,15 @@
   flex: 1;
   justify-content: center;
 
+  .closeNav{
+    display: none;
+  }
+
   &Bar {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
   }
 
   &Item {
@@ -61,12 +68,16 @@
 }
 
 .buttonToggle {
+  display: none;
   position: relative;
-  width: 110px;
   height: 100%;
-  background: $primary-color;
   border: 0;
   cursor: pointer;
+  border-radius: 0;
+
+  &:hover{
+    box-shadow: unset;
+  }
 
   &Bar{
     display: block;
@@ -75,7 +86,7 @@
     border: 0;
     margin: 8px auto;
     border-radius: 4px;
-    background-color: $white;
+    background: #26528B;
     transform-origin: 5px;
   }
 
@@ -99,7 +110,6 @@
 .locale{
   display: flex;
   background-color: transparent;
-  margin-right: 130px;
   align-items: center;
   border: 0;
   color: $black;
@@ -119,7 +129,7 @@
     width: 100%;
     max-width: $max-width;
     margin: 0 auto;
-    padding: 48px 0 18px 0;
+    padding: 48px 20px 18px 20px;
   
     .footerContent{
       display: flex;
@@ -135,6 +145,10 @@
       }
 
       .footerNav{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+
         &Item{
           position: relative;
           font-size: 15px;
@@ -205,5 +219,95 @@
       color: $white;
       margin-top: 25px;
     }
+  }
+}
+
+@media screen and(max-width: $screen-lg) {
+  .nav{
+
+    &Item{
+      font-size: 14px;
+      margin-left: 20px;
+      white-space: nowrap;
+    }
+  }
+}
+
+@media screen and(max-width: $screen-md) {
+  .header{
+    height: 55px;
+    padding: 0 30px;
+
+    &Logo{
+      height: 40px;
+    }
+  }
+
+  .buttonToggle{
+    display: block;
+    padding: 0;
+  }
+
+  .nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background-color: $primary-color;
+    z-index: 10;
+    transition: all .2s linear;
+    
+    &.navActive{
+      right: 0;
+      padding: 60px 30px;
+      
+      .navBar{
+        display: flex;
+      }
+    }
+
+    .navBar{
+      display: none;
+    }
+
+    .closeNav{
+      position: absolute;
+      display: block;
+      bottom: 40px;
+      color: $white;
+      cursor: pointer;
+    }
+
+    &Bar{
+      width: 100%;
+      height: 100%;
+      flex-flow: column;
+    }
+
+    &Item{
+      width: 100%;
+      margin: 0;
+      color: $white;
+      padding: 15px 0;
+      border-bottom: 1px solid $white;
+      text-align: center;
+
+      &:last-child{
+        border-bottom: 0;
+      }
+
+      &Active {
+        color: $white;
+      }
+    }
+  }
+
+  .locale{
+    display: none;
+  }
+
+  .footer{
+    display: none;
   }
 }
