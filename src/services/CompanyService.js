@@ -17,12 +17,21 @@ export const companyApi = createApi({
         }),
         providesTags: () => [{ type: 'BANNER', id: 'LIST' }],
       }),
-      getNews: build.query({
+      getCampaigns: build.query({
         query: (params) => ({
-          url: API.TOP_PAGE.TOP_NEWS,
+          url: API.TOP_PAGE.CAMPAIGNS,
           method: 'GET',
           data: null,
           params,
+        }),
+        providesTags: () => [{ type: 'NEWS', id: 'LIST' }],
+      }),
+      getCampaign: build.query({
+        query: (id) => ({
+          url: API.TOP_PAGE.CAMPAIGN(id),
+          method: 'GET',
+          data: null,
+          params: null,
         }),
         providesTags: () => [{ type: 'NEWS', id: 'LIST' }],
       }),
@@ -60,7 +69,8 @@ export const companyApi = createApi({
 
 export const {
   useGetTopPageBannersQuery,
-  useGetNewsQuery,
+  useGetCampaignQuery,
+  useGetCampaignsQuery,
   useGetTopPageProfileQuery,
   useGetSchedulesQuery,
   useGetScheduleQuery,

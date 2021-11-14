@@ -6,7 +6,8 @@ const API = {
     SCHEDULE: (id) => `${COMPANY_SERVICE}/schedule/${id}`,
   },
   TOP_PAGE: {
-    TOP_NEWS: `${COMPANY_SERVICE}/campaigns`,
+    CAMPAIGNS: `${COMPANY_SERVICE}/campaigns`,
+    CAMPAIGN: (id) => `${COMPANY_SERVICE}/campaign/${id}`,
     BANNERS: `${COMPANY_SERVICE}/banners`,
     PROFILE: `${COMPANY_SERVICE}/artist/login-id`
   },

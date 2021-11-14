@@ -1,4 +1,4 @@
-const { SCHEDULE_TYPE } = require('./config');
+const { SCHEDULE_TYPE, NEW_CATEGORIES } = require('./config');
 
 export const renderScheduleTypeLabel = (scheduleType) => {
   switch (scheduleType) {
@@ -14,7 +14,17 @@ export const renderScheduleTypeLabel = (scheduleType) => {
       return 'OTHERS';
     default:
       return '';
+  } 
+};
+
+export const renderNewsIcon = (category) => {
+  switch (category) {
+    case NEW_CATEGORIES.NOTIFICATION:
+      return 'icon-heart';
+    case NEW_CATEGORIES.MEDIA:
+      return 'icon-camera';
+    default:
+      return '';
   }
 };
 
-export const a = 1;

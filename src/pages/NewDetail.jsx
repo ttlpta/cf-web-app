@@ -1,11 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import moment from 'moment';
 import Layout from '../components/Layout';
 import Breadcrumb from '../components/Breadcrumb';
 import Button from '../components/Button';
 import NewItem from '../components/New/NewItem';
+import { useGetCampaignQuery } from '../services/CompanyService';
+
 
 export default function NewDetail() {
+  const { id } = useParams();
+
+
+  const { data: newDetailData, isSuccess: isGetScheduleDetailDataSuccess } = useGetCampaignQuery(id);
+
+
+  const { title, publish_time, content, image = 'https://picsum.photos/790/450' } = newDetailData?.data?.campaign || {};
+
+
   return (
     <Layout>
       <div className="new">
@@ -17,44 +29,19 @@ export default function NewDetail() {
             <Link to="/news">NEWS</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/news/detail">Photobook release dicision!</Link>
+            <Link to="/news/detail">{title}</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <div className="new__detail">
           <div className="new__detail__content">
             <div className="detail__header">
-              <div className="detail__header__time">2021.1.1</div>
-              <h1 className="detail__header__title">Photobook release dicision!</h1>
+              <div className="detail__header__time">{moment(+publish_time).format("YYYY.MM.DD")}</div>
+              <h1 className="detail__header__title">{title}</h1>
             </div>
             <div className="detail__content">
-              <p>
-                Thank you for your warm support to
-                <br />
-                Madoka Moriyasu.
-              </p>
+              <div dangerouslySetInnerHTML={{ __html: content }} />
 
-              <p>
-                The photo book will be released on <br />
-                August 25, 2021!
-              </p>
-
-              <p>
-                <b>■ Summary</b>
-                <br />
-                Madoka Moriyasu Photobook (provisional)）
-                <br />
-                Issued by: 〇〇 company
-                <br />
-                Price: 2000 yen + tax
-                <br />
-                Format: A4 size, 128 pages in color
-                <br />
-                Photograph: 〇〇
-                <br />
-                {'<Regular cover>'}
-              </p>
-
-              <img src="https://picsum.photos/790/450" alt="Img" />
+              <img src={image} alt="Img" />
               <div className="detail__content__btn">
                 <Button>Click here to purchase</Button>
               </div>

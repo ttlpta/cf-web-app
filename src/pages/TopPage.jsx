@@ -6,14 +6,15 @@ import Button from '../components/Button';
 import NewItem from '../components/New/NewItem';
 import ScheduleItem from '../components/Schedule/ScheduleItem';
 import Slider from '../components/Home/Slider';
-import { SORT_TYPE, COMPANY } from '../contants/config';
+import { SORT_TYPE } from '../contants/config';
 import {
-  useGetNewsQuery,
+  useGetCampaignsQuery,
   useGetSchedulesQuery,
   useGetTopPageBannersQuery,
   useGetTopPageProfileQuery,
 } from '../services/CompanyService';
 import { userProfileSelector } from '../redux/slices/authSlice';
+import { renderNewsIcon } from '../contants/helper';
 
 // Need Spinner
 
@@ -21,7 +22,7 @@ const TopPage = () => {
   const [getNewsQueryParams, setGetNewsQueryParams] = useState({
     limit: 10,
     sort: SORT_TYPE.NEWEST,
-    category: COMPANY.CAMPAIGN_CATEGORIES.EVENT,
+    category: null,
     // artistId: 16777517
   });
   const { email1: artisEmail } = useSelector(userProfileSelector);
@@ -44,7 +45,7 @@ const TopPage = () => {
       },
     },
   );
-  const { data: newsData, isSuccess: isGetNewsDataSuccess } = useGetNewsQuery(getNewsQueryParams);
+  const { data: newsData, isSuccess: isGetNewsDataSuccess } = useGetCampaignsQuery(getNewsQueryParams);
 
   const { data: profileData, isSuccess: isGetProfileDataSuccess } = useGetTopPageProfileQuery({
     login_id: 'ha.hoang.thi+8@bluebelt.asia',
@@ -67,16 +68,7 @@ const TopPage = () => {
     });
   };
 
-  const renderIcon = (category) => {
-    switch (category) {
-      case COMPANY.CAMPAIGN_CATEGORIES.NOTIFICATION:
-        return 'icon-heart';
-      case COMPANY.CAMPAIGN_CATEGORIES.MEDIA:
-        return 'icon-camera';
-      default:
-        return '';
-    }
-  };
+
 
   const renderNews = () => {
     if (isGetNewsDataSuccess) {
@@ -87,7 +79,7 @@ const TopPage = () => {
             <NewItem
               src={item.image}
               alt={item.title}
-              icon={renderIcon(item.category)}
+              icon={renderNewsIcon(item.category)}
               time={moment(+item.publish_time).format('DD.MM.YYYY')}
               description="サンプルサンプルサンプルサンプルサンプル サンプルサンプルサンプルサンプル"
             />
