@@ -1,15 +1,53 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFilter } from 'react-icons/bs';
+import moment from 'moment';
 import Layout from '../components/Layout';
 import Breadcrumb from '../components/Breadcrumb';
 import Button from '../components/Button';
 import Calendar from '../components/Calendar';
 import ScheduleItem from '../components/Schedule/ScheduleItem';
 import Modal from '../components/Modal';
+import { useGetSchedulesQuery } from '../services/CompanyService';
+import { SCHEDULE_TYPE } from '../contants/config';
 
 export default function Schedule() {
   const [toggleFilter, setToggleFilter] = useState(false);
+  const [scheduleQueryParams, setScheduleQueryParams] = useState({
+    month: null,
+    scheduleType: null
+  })
+
+  console.log('scheduleQueryParams', scheduleQueryParams);
+
+
+  const { data: scheduleData, isSuccess: isGetScheduleDataSuccess } = useGetSchedulesQuery(scheduleQueryParams, {
+    selectFromResult: ({ data, ...rest }) => {
+      let mapToScheduleData = [];
+      if (data?.data?.schedules?.length) {
+        mapToScheduleData = data.data.schedules.map((item) => ({
+          title: item.name,
+          date: moment(+item.publish_time).format("YYYY-MM-DD"),
+        }));
+      }
+
+      return { data: mapToScheduleData, ...rest };
+    }
+  });
+
+
+  // console.log('aa', scheduleData);
+
+  const onFilterCalendar = (scheduleType) => {
+    console.log("🚀 ~ onFilterCalendar ~ scheduleType", scheduleType)
+    setScheduleQueryParams({
+      ...scheduleQueryParams,
+      scheduleType,
+    });
+    setToggleFilter(false);
+  }
+
+
 
   return (
     <Layout>
@@ -31,11 +69,9 @@ export default function Schedule() {
         </div>
         <div className="schedule__calendar">
           <Calendar
-            events={[
-              { title: 'サンプルサンプルサンプルサンプルサンプル ', date: '2021-11-11' },
-              { title: 'サンプルサンプルサンプルサンプルサンプル ', date: '2021-11-11' },
-              { title: 'サンプルサンプルサンプルサンプルサンプル ', date: '2021-11-11' },
-            ]}
+            events={scheduleData || []}
+            scheduleQueryParams={scheduleQueryParams}
+            setScheduleQueryParams={setScheduleQueryParams}
           />
         </div>
         <h2 className="schedule__title">
@@ -50,14 +86,14 @@ export default function Schedule() {
       </div>
       <Modal visible={toggleFilter} onClose={() => setToggleFilter(false)} title="カテゴリから選択する">
         <div className="schedule__filter__list">
-          <Button className="filter__list--button">ALL</Button>
-          <Button className="filter__list--button">
+          <Button className="filter__list--button" onClick={() => onFilterCalendar(SCHEDULE_TYPE.ALL)}>ALL</Button>
+          <Button className="filter__list--button" onClick={() => onFilterCalendar(SCHEDULE_TYPE.EVENT)}>
             <i className="icon-shake-hand" /> <span>EVENT</span>
           </Button>
-          <Button className="filter__list--button">
+          <Button className="filter__list--button" onClick={() => onFilterCalendar(SCHEDULE_TYPE.LIVE)}>
             <i className="icon-live-photo" /> <span>LIVE</span>
           </Button>
-          <Button className="filter__list--button">
+          <Button className="filter__list--button" onClick={() => onFilterCalendar(SCHEDULE_TYPE.MEDIA)}>
             <i className="icon-media" /> <span>MEDIA</span>
           </Button>
         </div>

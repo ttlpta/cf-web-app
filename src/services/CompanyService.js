@@ -17,12 +17,21 @@ export const companyApi = createApi({
         }),
         providesTags: () => [{ type: 'BANNER', id: 'LIST' }],
       }),
-      getNews: build.query({
+      getCampaigns: build.query({
         query: (params) => ({
-          url: API.TOP_PAGE.TOP_NEWS,
+          url: API.TOP_PAGE.CAMPAIGNS,
           method: 'GET',
           data: null,
           params,
+        }),
+        providesTags: () => [{ type: 'NEWS', id: 'LIST' }],
+      }),
+      getCampaign: build.query({
+        query: (id) => ({
+          url: API.TOP_PAGE.CAMPAIGN(id),
+          method: 'GET',
+          data: null,
+          params: null,
         }),
         providesTags: () => [{ type: 'NEWS', id: 'LIST' }],
       }),
@@ -32,6 +41,16 @@ export const companyApi = createApi({
           method: 'GET',
           data: null,
           params,
+        }),
+        keepUnusedDataFor: 0,
+        providesTags: () => [{ type: 'SCHEDULES', id: 'LIST' }],
+      }),
+      getSchedule: build.query({
+        query: (id) => ({
+          url: API.COMPANY.SCHEDULE(id),
+          method: 'GET',
+          data: null,
+          params: null,
         }),
         providesTags: () => [{ type: 'SCHEDULES', id: 'LIST' }],
       }),
@@ -48,5 +67,11 @@ export const companyApi = createApi({
   },
 });
 
-export const { useGetTopPageBannersQuery, useGetNewsQuery, useGetTopPageProfileQuery, useGetSchedulesQuery } =
-  companyApi;
+export const {
+  useGetTopPageBannersQuery,
+  useGetCampaignQuery,
+  useGetCampaignsQuery,
+  useGetTopPageProfileQuery,
+  useGetSchedulesQuery,
+  useGetScheduleQuery,
+} = companyApi;

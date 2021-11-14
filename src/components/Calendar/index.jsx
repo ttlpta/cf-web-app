@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import momentPlugin from '@fullcalendar/moment';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
-function Calendar({ events, eventClick }) {
+function Calendar({ events, eventClick, scheduleQueryParams, setScheduleQueryParams }) {
   const calendarRef = useRef(null);
   const [currentDate, setCurrentDate] = useState(moment());
 
@@ -30,8 +30,18 @@ function Calendar({ events, eventClick }) {
     );
   };
 
-  const handleMonthChange = ({ view }) => {
+  const handleMonthChange = ({ view, start }) => {
+    // console.log('start', start);
     setCurrentDate(view.getCurrentData().currentDate);
+
+    console.log('bbb', {
+      ...scheduleQueryParams,
+      month: moment(start).valueOf()
+    })
+    setScheduleQueryParams({
+      ...scheduleQueryParams,
+      month: moment(start).valueOf()
+    });
   };
 
   return (
@@ -52,6 +62,7 @@ function Calendar({ events, eventClick }) {
       datesSet={handleMonthChange}
       events={events}
       eventClick={eventClick}
+      showNonCurrentDates={false}
     />
   );
 }
@@ -59,11 +70,16 @@ function Calendar({ events, eventClick }) {
 Calendar.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({})),
   eventClick: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  scheduleQueryParams: PropTypes.any,
+  setScheduleQueryParams: PropTypes.func,
 };
 
 Calendar.defaultProps = {
   events: [],
   eventClick: undefined,
+  scheduleQueryParams: {},
+  setScheduleQueryParams: undefined,
 };
 
 export default Calendar;

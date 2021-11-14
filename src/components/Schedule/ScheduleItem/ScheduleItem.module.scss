@@ -136,3 +136,44 @@
     }
   }
 }
+
+
+@media screen and(max-width: $screen-md) {
+  .item{
+    height: 50px;
+    margin: 0;
+    border-bottom: 1px solid #707070;
+
+    .date{
+      display: none;
+    }
+
+    .content{
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      box-shadow: unset;
+
+      .title{
+        font-size: 12px;
+        text-align: center;
+      }
+      
+      .info{
+        margin-bottom: 0;
+        .time{
+          font-weight: normal;
+          color: $black;
+        }
+
+        .type{
+          display: none;
+        }
+      }
+    }
+
+    .badge{
+      display: none;
+    }
+  }
+}

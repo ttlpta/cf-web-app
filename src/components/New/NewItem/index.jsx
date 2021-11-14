@@ -1,14 +1,13 @@
+import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './NewItem.module.scss';
 
 function NewItem(props) {
-  const { onClick, src, alt, icon, time, description } = props;
+  const { onClick, src, alt, icon, time, description, className } = props;
   return (
-    <div onClick={onClick} role="button" tabIndex={0} onKeyDown={null} className={styles.item}>
-      <div className={styles.img}>
-        <img src={src} alt={alt} />
-      </div>
+    <div onClick={onClick} role="button" tabIndex={0} onKeyDown={null} className={clsx(styles.item, className)}>
+      <div className={styles.img}>{src && <img src={src} alt={alt} />}</div>
       {icon && (
         <span className={styles.icon}>
           <i className={icon} />

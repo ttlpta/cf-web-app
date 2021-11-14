@@ -1,6 +1,7 @@
 import clsx from 'clsx';
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiX } from 'react-icons/fi';
 import Button from '../Button';
 import logoHeader from '../../assets/images/logo.svg';
 import logoFooter from '../../assets/images/logo-footer.svg';
@@ -8,12 +9,14 @@ import flagEn from '../../assets/images/flag-en.svg';
 import styles from './Layout.module.scss';
 
 function Header() {
+  const [toggle, setToggle] = useState(false);
+
   return (
     <div className={styles.header}>
       <div className={styles.headerLogo}>
         <img src={logoHeader} alt="Logo" />
       </div>
-      <div className={styles.nav}>
+      <div className={clsx(styles.nav, { [styles.navActive]: toggle })}>
         <nav className={styles.navBar}>
           <NavLink to="/" activeClassName={styles.navItemActive} className={styles.navItem}>
             ニュース
@@ -31,11 +34,22 @@ function Header() {
             ディスコグラフィー
           </NavLink>
         </nav>
+        <span className={styles.closeNav} role="button" tabIndex={0} onKeyDown={null} onClick={() => setToggle(false)}>
+          <FiX />
+        </span>
       </div>
       <Button className={styles.locale}>
         <img src={flagEn} alt="EN" />
         <span>EN</span>
         <FiChevronDown />
+      </Button>
+      <Button
+        onClick={() => setToggle(true)}
+        className={clsx(styles.buttonToggle, { [styles.buttonToggleActive]: toggle })}
+      >
+        <span className={styles.buttonToggleBar} />
+        <span className={styles.buttonToggleBar} />
+        <span className={styles.buttonToggleBar} />
       </Button>
     </div>
   );

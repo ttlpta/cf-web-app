@@ -1,0 +1,49 @@
+.rc-pagination{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin: 10px 0;
+
+  &-item{
+    margin: 0 15px;
+    cursor: pointer;
+
+    &:hover{
+      font-weight: $font-weight-extra-bold;
+    }
+
+    a{
+      color: $primary-color;
+    }
+
+    &-active{
+      a{
+        font-weight: $font-weight-extra-bold;
+      }
+    }
+  }
+
+  &-prev, &-next{
+    flex: 1;
+    font-weight: $font-weight-extra-bold;
+    color: $primary-color;
+    cursor: pointer;
+
+    span{
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-disabled{
+    cursor: not-allowed;
+    color: #ccc;
+  }
+
+  &-next{
+    span{
+      justify-content: flex-end;
+    }
+  }
+}

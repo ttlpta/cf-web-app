@@ -19,5 +19,7 @@ module.exports = {
     'react/no-array-index-key': 0,
     'no-unused-expressions': 0,
     'no-param-reassign': 0,
+    'no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
+    'camelcase': ['off'],
   },
 };
