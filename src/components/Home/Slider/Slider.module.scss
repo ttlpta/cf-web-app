@@ -74,3 +74,27 @@
     }
   }
 }
+
+@media screen and(max-width: $screen-md) {
+  .swiperMain{
+    display: none;
+  }
+  .swiper {
+    width: 100%;
+    padding: 20px 0;
+
+    .item {
+      position: relative;
+      width: 200px;
+      height: 200px;
+
+      &::after {
+        content: unset;
+      }
+    }
+
+    .pagination{
+      display: none;
+    }
+  }
+}

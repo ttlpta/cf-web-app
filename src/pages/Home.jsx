@@ -45,7 +45,7 @@ export default function Home() {
             description="サンプルサンプルサンプルサンプルサンプル サンプルサンプルサンプルサンプル"
           />
           <NewItem
-            src="https://picsum.photos/128/90"
+            // src="https://picsum.photos/128/90"
             alt="Title new"
             icon="icon-heart"
             time="2021.1.1"
