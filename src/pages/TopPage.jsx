@@ -15,25 +15,25 @@ import {
 } from '../services/CompanyService';
 import { userProfileSelector } from '../redux/slices/authSlice';
 import { renderNewsIcon } from '../contants/helper';
+import PATH from '../contants/path';
 
 // Need Spinner
+const currentDateInMillisecond = moment().valueOf();
 
 const TopPage = () => {
   const history = useHistory();
   const [getNewsQueryParams, setGetNewsQueryParams] = useState({
-    limit: 10,
+    limit: 5,
     sort: SORT_TYPE.NEWEST,
     category: null,
     // artistId: 16777517
   });
   const { email1: artisEmail } = useSelector(userProfileSelector);
-  console.log('artisEmail', artisEmail);
 
   const { data: bannersData } = useGetTopPageBannersQuery(
     { companyId: 1 },
     {
       selectFromResult: ({ data, ...rest }) => {
-        // console.log("🚀 ~ TopPage ~ data", data)
         let mapToSliderData = [];
         if (data?.data?.length) {
           mapToSliderData = data.data.map((item) => ({
@@ -53,23 +53,9 @@ const TopPage = () => {
   });
 
   const { data: scheduleData, isSuccess: isGetScheduleDataSuccess } = useGetSchedulesQuery({
-    month: 1635699600000,
+    month: currentDateInMillisecond,
+    pageSize: 5
   });
-
-  // console.log("🚀 ~ TopPage ~ newsData", newsData)
-  console.log('🚀 ~ TopPage ~ profileData', profileData);
-  console.log('🚀 ~ TopPage ~ scheduleData', scheduleData);
-
-  const onViewMore = (e) => {
-    e.preventDefault();
-    // alert('a')
-    setGetNewsQueryParams({
-      ...getNewsQueryParams,
-      category: null,
-    });
-  };
-
-
 
   const renderNews = () => {
     if (isGetNewsDataSuccess) {
@@ -86,7 +72,7 @@ const TopPage = () => {
               onClick={() => history.push(`/news/detail/${item.id}`)}
             />
           ))}
-          <Link className="home__new__viewmore" onClick={onViewMore} to="/">
+          <Link className="home__new__viewmore" to={PATH.NEW.LIST}>
             View more
           </Link>
         </div>
@@ -101,8 +87,7 @@ const TopPage = () => {
         <div className="home__schedule">
           <h2 className="home__schedule__title">SCHEDULE</h2>
           <div className="home__schedule__content">
-            {scheduleData.data.schedules.map((item) => (
-              // @ts-ignore
+            {scheduleData.data.schedules.records.map((item) => (
               <ScheduleItem
                 dateNumber={moment(+item.start_time).format('DD')}
                 name={item.name}
@@ -111,7 +96,7 @@ const TopPage = () => {
               />
             ))}
           </div>
-          <Link to="/" className="home__schedule__viewmore">
+          <Link to={PATH.SCHEDULE.LIST} className="home__schedule__viewmore">
             View more
           </Link>
         </div>
@@ -139,8 +124,7 @@ const TopPage = () => {
         dob, height, city, country, blood_type, hobby
       }
 
-      console.log('generalInfo', generalInfo);
-      const renderGeneralInfo =  () => Object.keys(generalInfo).map((key) => (
+      const renderGeneralInfo = () => Object.keys(generalInfo).map((key) => (
         <div className="profile__info__item">
           <p className="profile__info__item--title">{key}</p>
           <p className="profile__info__item--content">{generalInfo[key]}</p>
