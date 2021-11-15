@@ -22,3 +22,9 @@ export const SCHEDULE_TYPE = {
   MEDIA: 3,
   OTHERS: 9,
 };
+
+
+export const FORMAT = {
+  DATE_MONTH_DAY: 'DD.MM ddd',
+  YEAR_MONTH_DATE: 'YYYY-MM-DD'
+}

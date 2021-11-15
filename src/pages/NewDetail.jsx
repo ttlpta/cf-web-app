@@ -6,6 +6,7 @@ import Breadcrumb from '../components/Breadcrumb';
 import Button from '../components/Button';
 import NewItem from '../components/New/NewItem';
 import { useGetCampaignQuery } from '../services/CompanyService';
+import PATH from '../contants/path';
 
 
 export default function NewDetail() {
@@ -23,13 +24,13 @@ export default function NewDetail() {
       <div className="new">
         <Breadcrumb className="new__breadcrumb">
           <Breadcrumb.Item>
-            <Link to="/">トップ</Link>
+            <Link to={PATH.DEFAULT}>トップ</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/news">NEWS</Link>
+            <Link to={PATH.NEW.LIST}>NEWS</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/news/detail">{title}</Link>
+            <Link to={PATH.NEW.DETAIL(id)}>{title}</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <div className="new__detail">
