@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '../components/Button';
 import NewItem from '../components/New/NewItem';
@@ -19,6 +19,7 @@ import { renderNewsIcon } from '../contants/helper';
 // Need Spinner
 
 const TopPage = () => {
+  const history = useHistory();
   const [getNewsQueryParams, setGetNewsQueryParams] = useState({
     limit: 10,
     sort: SORT_TYPE.NEWEST,
@@ -82,6 +83,7 @@ const TopPage = () => {
               icon={renderNewsIcon(item.category)}
               time={moment(+item.publish_time).format('DD.MM.YYYY')}
               description="サンプルサンプルサンプルサンプルサンプル サンプルサンプルサンプルサンプル"
+              onClick={() => history.push(`/news/detail/${item.id}`)}
             />
           ))}
           <Link className="home__new__viewmore" onClick={onViewMore} to="/">
@@ -105,6 +107,7 @@ const TopPage = () => {
                 dateNumber={moment(+item.start_time).format('DD')}
                 name={item.name}
                 hour={moment(+item.start_time).format('HH:00')}
+                onClick={() => history.push(`/schedules/detail/${item.id}`)}
               />
             ))}
           </div>
@@ -149,7 +152,7 @@ const TopPage = () => {
           <h2 className="home__profile__title">PROFILE</h2>
           <div className="home__profile__content">
             <div className="home__profile__picture">
-              <img src={avatar_image} alt="aaa" />
+              <img src={avatar_image} alt={artist_name || 'avatar'} />
             </div>
             <div className="home__profile__information">
               <h1 className="profile__info__name">{artist_name} </h1>

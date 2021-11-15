@@ -12,9 +12,10 @@ export default function ScheduleItem({
   name,
   showDate = true,
   inline = false,
+  onClick = () => {}
 }) {
   return (
-    <div className={clsx(styles.item, className)}>
+    <div className={clsx(styles.item, className)} onClick={onClick} role="button" tabIndex={0} onKeyDown={null} >
       <div className={styles.date}>
         {showDate && (
           <>

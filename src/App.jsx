@@ -29,7 +29,7 @@ function App() {
           <Page500>
             <Switch>
               <Route path="/login" exact component={Login} />
-              <Route path="/" component={Home} exact />
+              {/* <Route path="/" component={Home} exact /> */}
               <Route path="/news" component={New} exact />
               <Route path="/news/detail/:id" component={NewDetail} exact />
               <Route path="/schedules" component={Schedule} exact />
@@ -37,7 +37,7 @@ function App() {
               <PrivateRouter path="/profile" exact>
                 <Profile />
               </PrivateRouter>
-              <PrivateRouter path="/top-page" exact>
+              <PrivateRouter path="/" exact>
                 <TopPage />
               </PrivateRouter>
             </Switch>
