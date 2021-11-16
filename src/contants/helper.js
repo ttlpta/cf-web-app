@@ -17,6 +17,25 @@ export const renderScheduleTypeLabel = (scheduleType) => {
   } 
 };
 
+export const renderScheduleTypeIcon = (scheduleType) => {
+  switch (scheduleType) {
+    case SCHEDULE_TYPE.ALL:
+      return 'icon-shake-hand';
+    case SCHEDULE_TYPE.LIVE:
+      return 'icon-live-photo';
+    case SCHEDULE_TYPE.EVENT:
+      return 'icon-shake-hand';
+    case SCHEDULE_TYPE.MEDIA:
+      return 'icon-media';
+    case SCHEDULE_TYPE.OTHERS:
+      return 'icon-shake-hand';
+    default:
+      return '';
+  } 
+};
+
+
+
 export const renderNewsIcon = (category) => {
   switch (category) {
     case NEW_CATEGORIES.NOTIFICATION:
