@@ -11,6 +11,7 @@ import Pagination from '../components/Pagination';
 import { useGetCampaignsQuery } from '../services/CompanyService';
 import { dayInMilliseconds, NEW_CATEGORIES, SORT_TYPE } from '../contants/config';
 import { renderNewsIcon } from '../contants/helper';
+import PATH from '../contants/path';
 
 export default function New() {
   const history = useHistory();
@@ -57,7 +58,6 @@ export default function New() {
   };
 
   const onFilterNewsCategories = (category) => {
-    // console.log("🚀 ~ onFilterCalendar ~ scheduleType", scheduleType)
     setGetNewsQueryParams({
       ...getNewsQueryParams,
       category,
@@ -72,10 +72,10 @@ export default function New() {
       <div className="new">
         <Breadcrumb className="new__breadcrumb">
           <Breadcrumb.Item>
-            <Link to="/">トップ</Link>
+            <Link to={PATH.DEFAULT}>トップ</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/new">NEWS</Link>
+            <Link to={PATH.NEW.LIST}>NEWS</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <h2 className="new__title">NEWS</h2>
@@ -89,20 +89,10 @@ export default function New() {
         </div>
         <div className="new__list">
           {renderNewList(newsData)}
-          <Pagination current={1} total={10} pageSize={3} />
+          {/* <Pagination current={1} total={10} pageSize={3} /> */}
         </div>
       </div>
-      <Modal visible={toggleFilter} onClose={() => setToggleFilter(false)} title="カテゴリ" filter>
-        <div className="new__filter__title">Sort</div>
-        <div className="new__filter__list md">
-          <Button className="filter__list--button active">
-            <span>Newest</span>
-          </Button>
-          <Button className="filter__list--button">
-            <span>Oldest</span>
-          </Button>
-        </div>
-        <div className="new__filter__title">Category</div>
+      <Modal visible={toggleFilter} onClose={() => setToggleFilter(false)} title="カテゴリ">
         <div className="new__filter__list">
           <Button className="filter__list--button" onClick={() => onFilterNewsCategories(NEW_CATEGORIES.NOTIFICATION)}>
             <i className="icon-notice" /> <span>NOTICE</span>
