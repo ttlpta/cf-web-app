@@ -10,7 +10,6 @@ import Breadcrumb from '../components/Breadcrumb';
 import ScheduleItem from '../components/Schedule/ScheduleItem';
 import { useGetScheduleQuery } from '../services/CompanyService';
 import { renderScheduleTypeLabel } from '../contants/helper';
-import PATH from '../contants/path';
 
 export default function ScheduleDetail() {
   const { id } = useParams();
@@ -22,7 +21,7 @@ export default function ScheduleDetail() {
 
   const { type, publish_time = '1631248980000', start_time = '1631248980000', name = 'FCイベント開催のお知らせ', image_url = 'https://picsum.photos/790/450', detail = 'Other schedule' } = scheduleDetailData?.data?.schedule || {};
 
-  const onBackToScheduleList = () => history.push(PATH.SCHEDULE.LIST);
+  const onBackToScheduleList = () => history.push('/schedules');
 
   const year = moment(+publish_time).get('year');
   const month = moment(+publish_time).get('month') + 1; // Month 0 - 11 
@@ -32,6 +31,7 @@ export default function ScheduleDetail() {
 
 
   const renderNextSchedules = (data) => {
+    console.log('data', data);
     if (isGetScheduleDetailDataSuccess && data?.data?.next_schedule?.length) {
       return data.data.next_schedule.map(item => <ScheduleItem name={item.name} scheduleType={renderScheduleTypeLabel(item.type)} dateNumber={moment(+item.end_time).get('date')} />)
     }
@@ -43,18 +43,19 @@ export default function ScheduleDetail() {
       <div className="schedule">
         <Breadcrumb className="schedule__breadcrumb">
           <Breadcrumb.Item>
-            <Link to={PATH.DEFAULT}>トップ</Link>
+            <Link to="/">トップ</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to={PATH.SCHEDULE.LIST}>スケジュール</Link>
+            <Link to="/schedules">スケジュール</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to={PATH.SCHEDULE.DETAIL(id)}>FCイベント開催のお知らせ</Link>
+            <Link to="/schedules/detail">FCイベント開催のお知らせ</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <div className="schedule__detail">
           <div className="schedule__detail__content">
             <div className="detail__header">
+              <Button className="detail__header__back">Back to new list</Button>
               <div className="detail__header__left">
                 <span className="detail__header__left--text">{year} {month}月</span>
                 <span className="detail__header__left--date">{day}/{month}</span>

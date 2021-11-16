@@ -1,6 +1,4 @@
 .home{
-  padding: 20px;
-
   &__user{
     display: flex;
     width: 100%;
@@ -161,7 +159,7 @@
 @media screen and(max-width: $screen-md) {
   .home{
     &__new, &__schedule{
-      padding: 0;
+      padding: 20px;
       margin-bottom: 20px;
       background-color: $white;
 

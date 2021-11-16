@@ -30,3 +30,9 @@
     }
   }
 }
+
+@media screen and(max-width: $screen-md) {
+  .wrapper{
+    padding: 0;
+  }
+}

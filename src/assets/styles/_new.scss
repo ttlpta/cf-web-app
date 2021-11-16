@@ -48,7 +48,15 @@
       }
     }
 
+    &__title{
+      display: none;
+    }
+
     &__list{
+      &.md{
+        display: none;
+      }
+
       display: flex;
       flex-flow: row wrap;
 
@@ -102,6 +110,10 @@
         padding-bottom: 40px;
         border-bottom: 1px dashed $primary-color;
 
+        &__back{
+          display: none;
+        }
+
         &__time{
           color: $primary-color;
         }
@@ -141,6 +153,104 @@
           background: #9ECBF7;
           border: 1px solid #9ECBF7;
           color: $white;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width: $screen-md) {
+  .new{
+    position: relative;
+
+    &__breadcrumb{
+      display: none !important;
+    }
+
+    &__title{
+      font-size: 30px;
+      padding: 0 30px;
+    }
+
+    &__divider{
+      display: none;
+    }
+
+    &__filter{
+      position: absolute;
+      top: 24px;
+      right: 20px;
+      margin: 0;
+
+      &__title{
+        display: block;
+        font-size: 28px;
+        font-weight: $font-weight-extra-bold;
+        line-height: 1.2em;
+        padding: 0 25px;
+      }
+
+      &__btn{
+        padding: 0;
+        border: 0;
+
+        span{
+          display: none;
+        }
+      }
+
+      &__list{
+        &.md{
+          display: flex;
+        }
+
+        .filter__list--button{
+          width: 120px;
+          height: 40px;
+          box-shadow: unset;
+          font-size: 15px;
+          color: #707070;
+          background-color: $white;
+          border-color: #707070;
+
+          &.active{
+            background-color: #707070;
+            color: $white;
+          }
+          
+          i{
+            display: none;
+          }
+        }
+      }
+    }
+
+    &__detail{
+  
+      &__content{
+        .detail__header{
+          padding-bottom: 5px;
+
+          &__back{
+            display: block;
+            font-size: 13px;
+            padding: 6px 10px;
+            margin-bottom: 5px;
+          }
+
+          &__time{
+            color: $black;
+            font-weight: bold;
+            font-size: 18px;
+          }
+
+          &__title{
+            margin: 0;
+            font-size: 18px;
+            color: $black;
+            text-align: center;
+            font-weight: $font-weight-extra-bold;
+          }
         }
       }
     }

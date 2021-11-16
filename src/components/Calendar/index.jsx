@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
@@ -31,7 +31,13 @@ function Calendar({ events, eventClick, scheduleQueryParams, setScheduleQueryPar
   };
 
   const handleMonthChange = ({ view, start }) => {
+    // console.log('start', start);
     setCurrentDate(view.getCurrentData().currentDate);
+
+    console.log('bbb', {
+      ...scheduleQueryParams,
+      month: moment(start).valueOf()
+    })
     setScheduleQueryParams({
       ...scheduleQueryParams,
       month: moment(start).valueOf()

@@ -42,6 +42,10 @@
       display: flex;
       flex-flow: row wrap;
 
+      &.md{
+        display: none;
+      }
+
       .filter__list--button{
         display: flex;
         flex: 1;
@@ -322,6 +326,217 @@
 
         &__title{
           margin: 50px 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width: $screen-md) {
+  .schedule{
+    position: relative;
+
+    &__breadcrumb{
+      display: none !important;
+    }
+
+    &__title{
+      font-size: 30px;
+      padding: 0 30px;
+
+      &.lg{
+        display: none;
+      }
+    }
+
+    &__divider{
+      display: none;
+    }
+
+    &__filter{
+      position: absolute;
+      top: 24px;
+      right: 20px;
+      margin: 0;
+
+      &__title{
+        display: block;
+        font-size: 28px;
+        font-weight: $font-weight-extra-bold;
+        line-height: 1.2em;
+        padding: 0 25px;
+      }
+
+      &__btn{
+        padding: 0;
+        border: 0;
+
+        span{
+          display: none;
+        }
+      }
+
+      &__list{
+        &.md{
+          display: flex;
+        }
+
+        .filter__list--button{
+          width: 120px;
+          height: 40px;
+          box-shadow: unset;
+          font-size: 15px;
+          color: #707070;
+          background-color: $white;
+          border-color: #707070;
+
+          &.active{
+            background-color: #707070;
+            color: $white;
+          }
+          
+          i{
+            display: none;
+          }
+        }
+      }
+    }
+
+    &__calendar{
+      width: 100%;
+      height: 300px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+
+      .fc{
+        .fc-toolbar{
+          &.fc-header-toolbar{
+            margin-bottom: 0;
+            padding: 5px;
+  
+            .fc-toolbar-title{
+              font-size: 12px;
+              color: $primary-color;
+            }
+          }
+        }
+  
+        .fc-col-header-cell{
+          background-color: #E6E6E6;
+          border-right: 1px solid #fff;
+          padding: 0;
+          
+          &-cushion {
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1.2em;
+            font-weight: $font-weight-normal;
+            text-transform: uppercase;
+          }
+        }
+  
+        .fc-daygrid-day{
+  
+          &.fc-day-today{
+            background-color: transparent;
+  
+            .fc-daygrid-day-number{
+              width: 24px;
+              height: 24px;
+              background-color: $primary-color;
+              color: $white;
+              border-radius: 50%;
+              padding: 0;
+              text-align: center;
+            }
+          }
+  
+          &-top{
+            justify-content: center;
+          }
+        }
+        
+        .fc-button{
+          background-color: transparent;
+          border: 0;
+          color: $primary-color;
+          font-size: 12px;
+          font-weight: $font-weight-extra-bold;
+  
+          span {
+            display: flex;
+            align-items: center;
+  
+            svg{
+              font-size: 16px;
+            }
+          }
+        }
+  
+        .fc-button-primary{
+  
+          &:hover, &:active, &:focus, &:not(:disabled):active, &:not(:disabled):active:focus{
+            outline: none;
+            color: $primary-color;
+            background-color: transparent;
+            box-shadow: none;
+          }
+        }
+  
+        .fc-daygrid-event-harness{
+          margin-bottom: 2px;
+        }
+  
+        .fc-h-event{
+          font-size: 8px;
+          line-height: 12px;
+          padding: 0 5px;
+          text-align: center;
+          background-color: $primary-color;
+          border-radius: 20px;
+        }
+      }
+    }
+
+    &__detail{
+  
+      &__content{
+        .detail__header{
+          display: block;
+          padding-bottom: 5px;
+
+          &__left{
+            display: none;
+          }
+
+          &__right{
+            &--info{
+              span{
+                &:last-child{
+                  color: $black;
+                  font-weight: bold;
+                  font-size: 18px;
+                }
+                &:first-child{
+                  display: none;
+                }
+              }
+            }
+            &--title{
+              margin: 0;
+              font-size: 18px;
+              color: $black;
+              text-align: center;
+              font-weight: $font-weight-extra-bold;
+            }
+          }
+
+          &__back{
+            display: block;
+            font-size: 13px;
+            padding: 6px 10px;
+            margin-bottom: 5px;
+          }
         }
       }
     }

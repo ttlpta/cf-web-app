@@ -6,37 +6,33 @@ import Breadcrumb from '../components/Breadcrumb';
 import Button from '../components/Button';
 import NewItem from '../components/New/NewItem';
 import { useGetCampaignQuery } from '../services/CompanyService';
-import PATH from '../contants/path';
-
 
 export default function NewDetail() {
   const { id } = useParams();
 
-
   const { data: newDetailData, isSuccess: isGetScheduleDetailDataSuccess } = useGetCampaignQuery(id);
 
-
   const { title, publish_time, content, image = 'https://picsum.photos/790/450' } = newDetailData?.data?.campaign || {};
-
 
   return (
     <Layout>
       <div className="new">
         <Breadcrumb className="new__breadcrumb">
           <Breadcrumb.Item>
-            <Link to={PATH.DEFAULT}>トップ</Link>
+            <Link to="/">トップ</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to={PATH.NEW.LIST}>NEWS</Link>
+            <Link to="/news">NEWS</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to={PATH.NEW.DETAIL(id)}>{title}</Link>
+            <Link to="/news/detail">{title}</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <div className="new__detail">
           <div className="new__detail__content">
             <div className="detail__header">
-              <div className="detail__header__time">{moment(+publish_time).format("YYYY.MM.DD")}</div>
+              <Button className="detail__header__back">Back to new list</Button>
+              <div className="detail__header__time">{moment(+publish_time).format('YYYY.MM.DD')}</div>
               <h1 className="detail__header__title">{title}</h1>
             </div>
             <div className="detail__content">

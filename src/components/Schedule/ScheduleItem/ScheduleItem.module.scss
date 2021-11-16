@@ -154,6 +154,29 @@
       border-radius: 0;
       box-shadow: unset;
 
+      &.inline{
+        flex-flow: column;
+        justify-content: center;
+        align-items: unset;
+        box-shadow: 0px 4px 0px #E3DCCF;
+  
+        .info{
+          margin-bottom: 0;
+  
+          .type{
+            display: none !important;
+          }
+  
+          .time{
+            margin-right: 0;
+            font-size: 12px;
+            line-height: 1em;
+            font-weight: normal;
+            color: $black;
+          }
+        }
+      }
+
       .title{
         font-size: 12px;
         text-align: center;

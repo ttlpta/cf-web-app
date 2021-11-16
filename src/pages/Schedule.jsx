@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BsFilter } from 'react-icons/bs';
 import moment from 'moment';
 import Layout from '../components/Layout';
@@ -9,39 +9,25 @@ import Calendar from '../components/Calendar';
 import ScheduleItem from '../components/Schedule/ScheduleItem';
 import Modal from '../components/Modal';
 import { useGetSchedulesQuery } from '../services/CompanyService';
-import { FORMAT, SCHEDULE_TYPE } from '../contants/config';
-import Pagination from '../components/Pagination';
-import { renderScheduleTypeIcon, renderScheduleTypeLabel } from '../contants/helper';
-import PATH from '../contants/path';
-
-const currentDate = moment().format(FORMAT.DATE_MONTH_DAY);
-const currentDateInMillisecond = moment().valueOf();
-
+import { SCHEDULE_TYPE } from '../contants/config';
 
 export default function Schedule() {
-  const history = useHistory();
-
   const [toggleFilter, setToggleFilter] = useState(false);
   const [scheduleQueryParams, setScheduleQueryParams] = useState({
     month: null,
-    scheduleType: SCHEDULE_TYPE.ALL
-  });
-
-  const [currentScheduleQueryParams, setCurrentScheduleQueryParams] = useState({
-    month: currentDateInMillisecond,
-    scheduleType: SCHEDULE_TYPE.ALL,
-    pageNo: 1,
-    pageSize: 5
+    scheduleType: null
   })
 
+  console.log('scheduleQueryParams', scheduleQueryParams);
 
-  const { data: scheduleData } = useGetSchedulesQuery(scheduleQueryParams, {
+
+  const { data: scheduleData, isSuccess: isGetScheduleDataSuccess } = useGetSchedulesQuery(scheduleQueryParams, {
     selectFromResult: ({ data, ...rest }) => {
       let mapToScheduleData = [];
-      if (data?.data?.schedules?.records?.length) {
-        mapToScheduleData = data.data.schedules.records.map((item) => ({
+      if (data?.data?.schedules?.length) {
+        mapToScheduleData = data.data.schedules.map((item) => ({
           title: item.name,
-          date: moment(+item.publish_time).format(FORMAT.YEAR_MONTH_DATE),
+          date: moment(+item.publish_time).format("YYYY-MM-DD"),
         }));
       }
 
@@ -49,48 +35,11 @@ export default function Schedule() {
     }
   });
 
-  const { data: currentScheduleData } = useGetSchedulesQuery(currentScheduleQueryParams);
 
-
-
-  const onPaginate = (current) => {
-    setCurrentScheduleQueryParams({
-      ...currentScheduleQueryParams,
-      pageNo: current
-    })
-
-  }
-
-
-  const renderCurrentSchedules = (data) => useMemo(() => {
-    if (data?.data?.schedules?.records?.length) {
-      return (
-        <div>
-          <h2 className="schedule__title">
-            <span className="schedule__title__prefix">{currentDate || ''}</span> SCHEDULE
-          </h2>
-          <div className="schedule__list">
-            {data.data.schedules.records.map(item =>
-              <ScheduleItem
-                hour={`${moment(+item.publish_time).get('hour')}:00`}
-                inline
-                icon={renderScheduleTypeIcon(item.type)}
-                showDate={false}
-                scheduleType={renderScheduleTypeLabel(item.type)}
-                onClick={() => history.push(PATH.SCHEDULE.DETAIL(item.id))}
-              />
-            )}
-            <Pagination current={currentScheduleQueryParams.pageNo} total={data?.data?.schedules?.total} pageSize={currentScheduleQueryParams.pageSize} onChange={onPaginate} />
-          </div>
-        </div>
-      )
-    }
-    return null;
-  }, [currentScheduleData])
-
-
+  // console.log('aa', scheduleData);
 
   const onFilterCalendar = (scheduleType) => {
+    console.log("🚀 ~ onFilterCalendar ~ scheduleType", scheduleType)
     setScheduleQueryParams({
       ...scheduleQueryParams,
       scheduleType,
@@ -108,7 +57,7 @@ export default function Schedule() {
             <Link to="/">トップ</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to={PATH.SCHEDULE.LIST}>スケジュール</Link>
+            <Link to="/schedules">スケジュール</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <h2 className="schedule__title">SCHEDULE</h2>
@@ -125,10 +74,27 @@ export default function Schedule() {
             setScheduleQueryParams={setScheduleQueryParams}
           />
         </div>
-        {renderCurrentSchedules(currentScheduleData)}
-
+        <h2 className="schedule__title lg">
+          <span className="schedule__title__prefix">11.8 Mon</span> SCHEDULE
+        </h2>
+        <div className="schedule__list">
+          <ScheduleItem inline icon="icon-shake-hand" showDate={false} />
+          <ScheduleItem inline icon="icon-live-photo" showDate={false} />
+          <ScheduleItem inline icon="icon-shake-hand" showDate={false} />
+          <ScheduleItem inline icon="icon-live-photo" showDate={false} />
+        </div>
       </div>
-      <Modal visible={toggleFilter} onClose={() => setToggleFilter(false)} title="カテゴリから選択する">
+      <Modal visible={toggleFilter} onClose={() => setToggleFilter(false)} title="カテゴリから選択する" filter>
+        <div className="schedule__filter__title">Sort</div>
+        <div className="schedule__filter__list md">
+          <Button className="filter__list--button active">
+            <span>Newest</span>
+          </Button>
+          <Button className="filter__list--button">
+            <span>Oldest</span>
+          </Button>
+        </div>
+        <div className="schedule__filter__title">Category</div>
         <div className="schedule__filter__list">
           <Button className="filter__list--button" onClick={() => onFilterCalendar(SCHEDULE_TYPE.ALL)}>ALL</Button>
           <Button className="filter__list--button" onClick={() => onFilterCalendar(SCHEDULE_TYPE.EVENT)}>
