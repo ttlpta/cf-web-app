@@ -10,46 +10,57 @@ import Breadcrumb from '../components/Breadcrumb';
 import ScheduleItem from '../components/Schedule/ScheduleItem';
 import { useGetScheduleQuery } from '../services/CompanyService';
 import { renderScheduleTypeLabel } from '../contants/helper';
+import PATH from '../contants/path';
 
 export default function ScheduleDetail() {
   const { id } = useParams();
   const history = useHistory();
 
-
   const { data: scheduleDetailData, isSuccess: isGetScheduleDetailDataSuccess } = useGetScheduleQuery(id);
 
+  const {
+    type,
+    publish_time = '1631248980000',
+    start_time = '1631248980000',
+    name = 'FCイベント開催のお知らせ',
+    image_url = 'https://picsum.photos/790/450',
+    detail = 'Other schedule',
+  } = scheduleDetailData?.data?.schedule || {};
 
-  const { type, publish_time = '1631248980000', start_time = '1631248980000', name = 'FCイベント開催のお知らせ', image_url = 'https://picsum.photos/790/450', detail = 'Other schedule' } = scheduleDetailData?.data?.schedule || {};
-
-  const onBackToScheduleList = () => history.push('/schedules');
+  const onBackToScheduleList = () => history.push(PATH.SCHEDULE.LIST);
 
   const year = moment(+publish_time).get('year');
-  const month = moment(+publish_time).get('month') + 1; // Month 0 - 11 
+  const month = moment(+publish_time).get('month') + 1; // Month 0 - 11
   const day = moment(+publish_time).get('date');
   const hour = moment(+start_time).get('hour');
   // console.log("🚀 ~ ScheduleDetail ~ day", moment(+publish_time).format("DD MM YYYY HH"))
 
-
   const renderNextSchedules = (data) => {
-    console.log('data', data);
     if (isGetScheduleDetailDataSuccess && data?.data?.next_schedule?.length) {
-      return data.data.next_schedule.map(item => <ScheduleItem name={item.name} scheduleType={renderScheduleTypeLabel(item.type)} dateNumber={moment(+item.end_time).get('date')} />)
+      return data.data.next_schedule.map((item) => (
+        <ScheduleItem
+          name={item.name}
+          scheduleType={renderScheduleTypeLabel(item.type)}
+          dateNumber={moment(+item.end_time).get('date')}
+          onClick={() => history.push(PATH.SCHEDULE.DETAIL(item.id))}
+        />
+      ));
     }
     return null;
-  }
+  };
 
   return (
     <Layout>
       <div className="schedule">
         <Breadcrumb className="schedule__breadcrumb">
           <Breadcrumb.Item>
-            <Link to="/">トップ</Link>
+            <Link to={PATH.DEFAULT}>トップ</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/schedules">スケジュール</Link>
+            <Link to={PATH.SCHEDULE.LIST}>スケジュール</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to="/schedules/detail">FCイベント開催のお知らせ</Link>
+            <Link to={PATH.SCHEDULE.DETAIL(id)}>FCイベント開催のお知らせ</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
         <div className="schedule__detail">
@@ -57,8 +68,12 @@ export default function ScheduleDetail() {
             <div className="detail__header">
               <Button className="detail__header__back">Back to new list</Button>
               <div className="detail__header__left">
-                <span className="detail__header__left--text">{year} {month}月</span>
-                <span className="detail__header__left--date">{day}/{month}</span>
+                <span className="detail__header__left--text">
+                  {year} {month}月
+                </span>
+                <span className="detail__header__left--date">
+                  {day}/{month}
+                </span>
                 <span className="detail__header__left--info">水</span>
               </div>
               <div className="detail__header__right">
@@ -71,7 +86,7 @@ export default function ScheduleDetail() {
             </div>
             <div className="detail__content">
               <img src={image_url} alt="Img" />
-              <p>{detail}</p>
+              <div dangerouslySetInnerHTML={{ __html: detail }} />
               <Button className="detail__content__btn">購入はこちら</Button>
             </div>
             <div className="detail__footer">
@@ -92,16 +107,13 @@ export default function ScheduleDetail() {
             </div>
           </div>
 
-
           <div className="schedule__detail__related">
-            <Button className="detail__related__btn" onClick={onBackToScheduleList}>Schedule一覧</Button>
+            <Button className="detail__related__btn" onClick={onBackToScheduleList}>
+              Schedule一覧
+            </Button>
             <h3 className="detail__related__title">最新スケジュール</h3>
-            <div className="detail__related__list">
-              {renderNextSchedules(scheduleDetailData)}
-
-            </div>
+            <div className="detail__related__list">{renderNextSchedules(scheduleDetailData)}</div>
           </div>
-
         </div>
       </div>
     </Layout>

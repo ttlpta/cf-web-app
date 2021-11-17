@@ -14,7 +14,9 @@ function Header() {
   return (
     <div className={styles.header}>
       <div className={styles.headerLogo}>
-        <img src={logoHeader} alt="Logo" />
+        <Link to="/">
+          <img src={logoHeader} alt="Logo" />
+        </Link>
       </div>
       <div className={clsx(styles.nav, { [styles.navActive]: toggle })}>
         <nav className={styles.navBar}>

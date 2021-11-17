@@ -10,7 +10,7 @@ import reduxStore from './redux/store';
 import './App.scss';
 
 // const Dashboard = lazy(() => import('./pages/DashBoard'));
-const Home = lazy(() => import('./pages/Home'));
+// const Home = lazy(() => import('./pages/Home'));
 const New = lazy(() => import('./pages/New'));
 const NewDetail = lazy(() => import('./pages/NewDetail'));
 const Schedule = lazy(() => import('./pages/Schedule'));
@@ -29,11 +29,18 @@ function App() {
           <Page500>
             <Switch>
               <Route path="/login" exact component={Login} />
-              {/* <Route path="/" component={Home} exact /> */}
-              <Route path="/news" component={New} exact />
-              <Route path="/news/detail/:id" component={NewDetail} exact />
-              <Route path="/schedules" component={Schedule} exact />
-              <Route path="/schedules/detail/:id" component={ScheduleDetail} exact />
+              <PrivateRouter path="/news" exact>
+                <New />
+              </PrivateRouter>
+              <PrivateRouter path="/news/detail/:id" exact>
+                <NewDetail />
+              </PrivateRouter>
+              <PrivateRouter path="/schedules" exact>
+                <Schedule />
+              </PrivateRouter>
+              <PrivateRouter path="/schedules/detail/:id" exact>
+                <ScheduleDetail />
+              </PrivateRouter>
               <PrivateRouter path="/profile" exact>
                 <Profile />
               </PrivateRouter>
