@@ -15,7 +15,8 @@ const New = lazy(() => import('./pages/New'));
 const NewDetail = lazy(() => import('./pages/NewDetail'));
 const Schedule = lazy(() => import('./pages/Schedule'));
 const ScheduleDetail = lazy(() => import('./pages/ScheduleDetail'));
-const Profile = lazy(() => import('./pages/Profile'));
+const ArtistProfile = lazy(() => import('./pages/ArtistProfile'));
+// const Profile = lazy(() => import('./pages/Profile'));
 const TopPage = lazy(() => import('./pages/TopPage'));
 
 const Login = lazy(() => import('./pages/Login'));
@@ -29,24 +30,12 @@ function App() {
           <Page500>
             <Switch>
               <Route path="/login" exact component={Login} />
-              <PrivateRouter path="/news" exact>
-                <New />
-              </PrivateRouter>
-              <PrivateRouter path="/news/detail/:id" exact>
-                <NewDetail />
-              </PrivateRouter>
-              <PrivateRouter path="/schedules" exact>
-                <Schedule />
-              </PrivateRouter>
-              <PrivateRouter path="/schedules/detail/:id" exact>
-                <ScheduleDetail />
-              </PrivateRouter>
-              <PrivateRouter path="/profile" exact>
-                <Profile />
-              </PrivateRouter>
-              <PrivateRouter path="/" exact>
-                <TopPage />
-              </PrivateRouter>
+              <Route path="/news" exact component={New} />
+              <Route path="/news/detail/:id" exact component={NewDetail} />
+              <Route path="/schedules" exact component={Schedule} />
+              <Route path="/schedules/detail/:id" exact component={ScheduleDetail} />
+              <Route path="/artist-profile" exact component={ArtistProfile} />
+              <Route path="/" exact component={TopPage} />
             </Switch>
           </Page500>
         </Suspense>

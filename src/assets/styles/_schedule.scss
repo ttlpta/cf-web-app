@@ -1,4 +1,5 @@
 .schedule{
+  height: 100%;
   padding: 20px;
   
   background-color: #FFFCF8;
@@ -22,6 +23,10 @@
     display: flex;
     justify-content: center;
     margin-bottom: 50px;
+
+    &__title{
+      display: none;
+    }
 
     &__btn{
       display: flex;
@@ -189,6 +194,10 @@
         display: flex;
         padding-bottom: 40px;
         border-bottom: 1px dashed $primary-color;
+
+        &__back{
+          display: none;
+        }
 
         &__left{
           display: flex;

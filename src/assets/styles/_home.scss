@@ -1,4 +1,6 @@
 .home{
+  height: 100%;
+  
   &__user{
     display: flex;
     width: 100%;
@@ -105,14 +107,12 @@
     &__content{
       display: flex;
       width: 100%;
-      height: 675px;
       flex-flow: row wrap;
     }
 
     &__picture{
       width: 600px;
       max-width: 100%;
-      height: 100%;
       border-radius: 20px 0 0 20px;
       
       img{
@@ -173,9 +173,57 @@
         display: none;
       }
     }
+  }
+}
 
+@media  screen and(max-width: $screen-lg) {
+  .home{
     &__profile{
-      display: none;
+      width: 100%;
+      max-width: 1372px;
+      margin: 0 auto;
+      margin-bottom: 100px;
+
+      &__title{
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+
+      &__picture{
+        position: relative;
+        width: 100%;
+        padding-top: 40%;
+        
+        img{
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 0;
+        }
+      }
+      
+      &__information{
+        padding: 20px;
+
+        .profile__info{
+          &__name{
+            font-size: 20px;
+          }
+
+          &__subname{
+            font-size: 20px;
+          }
+
+          &__item{
+            display: flex;
+
+            &--title{
+              width: 120px;
+            }
+          }
+        }
+      }
     }
   }
 }

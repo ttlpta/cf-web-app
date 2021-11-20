@@ -2,7 +2,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Button from '../components/Button';
+import Layout from '../components/Layout';
 import NewItem from '../components/New/NewItem';
 import ScheduleItem from '../components/Schedule/ScheduleItem';
 import Slider from '../components/Home/Slider';
@@ -107,7 +107,6 @@ const TopPage = () => {
   };
 
   const renderProfile = () => {
-    console.log({currentUserAccountType});
     if (isGetProfileDataSuccess) {
       const {
         avatar_image = 'https://picsum.photos/600/700',
@@ -119,7 +118,7 @@ const TopPage = () => {
         city = 'Tokyo',
         country = 'Japan',
         hobby = 'Play basketball, draw, watch funny programs, dance cover',
-        blood_type = 1
+        blood_type = 1,
       } = profileData?.data?.artist || {};
 
       const generalInfo = {
@@ -139,7 +138,7 @@ const TopPage = () => {
           </div>
         ));
 
-      return currentUserAccountType === 1 ? null :(
+      return currentUserAccountType === 1 ? null : (
         <div className="home__profile">
           <h2 className="home__profile__title">PROFILE</h2>
           <div className="home__profile__content">
@@ -160,27 +159,14 @@ const TopPage = () => {
   };
 
   return (
-    <div className="home">
-      <Slider items={bannersData || []} />
-      <div className="home__user">
-        <Button className="home__user--btn">
-          <span className="home__user--btn__icon">
-            <i className="icon-user" />
-          </span>
-          <span className="home__user--btn__title">プロフィール</span>
-        </Button>
-        <Button className="home__user--btn">
-          <span className="home__user--btn__icon">
-            <i className="icon-calendar" />
-          </span>
-          <span className="home__user--btn__title">スケジュール</span>
-        </Button>
+    <Layout>
+      <div className="home">
+        <Slider items={bannersData || []} />
+        {renderNews()}
+        {renderSchedule()}
+        {renderProfile()}
       </div>
-
-      {renderNews()}
-      {renderSchedule()}
-      {renderProfile()}
-    </div>
+    </Layout>
   );
 };
 
