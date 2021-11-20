@@ -30,9 +30,13 @@ const Slider = React.memo((props) => {
         slidesPerView={1.8}
         spaceBetween={12}
         breakpoints={{
-          768: {
+          769: {
             slidesPerView: 4,
             spaceBetween: 25,
+          },
+          1201: {
+            slidesPerView: 4,
+            spaceBetween: 50,
           },
         }}
         centeredSlides
