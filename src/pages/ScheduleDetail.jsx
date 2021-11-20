@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { FaFacebook, FaTwitter } from 'react-icons/fa';
-import { BsLine } from 'react-icons/bs';
-import { RiShareForwardFill } from 'react-icons/ri';
 import moment from 'moment';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
@@ -11,10 +8,12 @@ import ScheduleItem from '../components/Schedule/ScheduleItem';
 import { useGetScheduleQuery } from '../services/CompanyService';
 import { renderScheduleTypeLabel } from '../contants/helper';
 import PATH from '../contants/path';
+import SocialShare from '../components/SocialShare';
 
 export default function ScheduleDetail() {
   const { id } = useParams();
   const history = useHistory();
+  const currentUrl = window.location.href;
 
   const { data: scheduleDetailData, isSuccess: isGetScheduleDetailDataSuccess } = useGetScheduleQuery(id);
 
@@ -91,18 +90,7 @@ export default function ScheduleDetail() {
             </div>
             <div className="detail__footer">
               <div className="detail__footer__share">
-                <span>
-                  <FaTwitter />
-                </span>
-                <span>
-                  <FaFacebook />
-                </span>
-                <span>
-                  <BsLine />
-                </span>
-                <span>
-                  <RiShareForwardFill />
-                </span>
+                <SocialShare url={currentUrl} />
               </div>
             </div>
           </div>

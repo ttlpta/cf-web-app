@@ -7,9 +7,11 @@ import Button from '../components/Button';
 import NewItem from '../components/New/NewItem';
 import { useGetCampaignQuery } from '../services/CompanyService';
 import PATH from '../contants/path';
+import SocialShare from '../components/SocialShare';
 
 export default function NewDetail() {
   const { id } = useParams();
+  const currentUrl = window.location.href;
 
   const { data: newDetailData, isSuccess: isGetScheduleDetailDataSuccess } = useGetCampaignQuery(id);
 
@@ -38,8 +40,8 @@ export default function NewDetail() {
             </div>
             <div className="detail__content">
               <div dangerouslySetInnerHTML={{ __html: content }} />
-
               <img src={image} alt="Img" />
+              <SocialShare url={currentUrl} />
               <div className="detail__content__btn">
                 <Button>Click here to purchase</Button>
               </div>

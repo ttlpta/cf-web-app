@@ -8,52 +8,57 @@ import logoFooter from '../../assets/images/logo-footer.svg';
 import flagEn from '../../assets/images/flag-en.svg';
 import styles from './Layout.module.scss';
 
+
+
 function Header() {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className={styles.header}>
-      <div className={styles.headerLogo}>
-        <Link to="/">
-          <img src={logoHeader} alt="Logo" />
-        </Link>
+    <>
+      <div className={styles.header}>
+        <div className={styles.headerLogo}>
+          <Link to="/">
+            <img src={logoHeader} alt="Logo" />
+          </Link>
+        </div>
+        <div className={clsx(styles.nav, { [styles.navActive]: toggle })}>
+          <nav className={styles.navBar}>
+            <NavLink to="/" activeClassName={styles.navItemActive} className={styles.navItem}>
+              ニュース
+            </NavLink>
+            <NavLink to="2" activeClassName={styles.navItemActive} className={styles.navItem}>
+              スケジュール
+            </NavLink>
+            <NavLink to="3" activeClassName={styles.navItemActive} className={styles.navItem}>
+              メンバー
+            </NavLink>
+            <NavLink to="4" activeClassName={styles.navItemActive} className={styles.navItem}>
+              プロデューサー
+            </NavLink>
+            <NavLink to="5" activeClassName={styles.navItemActive} className={styles.navItem}>
+              ディスコグラフィー
+            </NavLink>
+          </nav>
+          <span className={styles.closeNav} role="button" tabIndex={0} onKeyDown={null} onClick={() => setToggle(false)}>
+            <FiX />
+          </span>
+        </div>
+        <Button className={styles.locale}>
+          <img src={flagEn} alt="EN" />
+          <span>EN</span>
+          <FiChevronDown />
+        </Button>
+        <Button
+          onClick={() => setToggle(true)}
+          className={clsx(styles.buttonToggle, { [styles.buttonToggleActive]: toggle })}
+        >
+          <span className={styles.buttonToggleBar} />
+          <span className={styles.buttonToggleBar} />
+          <span className={styles.buttonToggleBar} />
+        </Button>
       </div>
-      <div className={clsx(styles.nav, { [styles.navActive]: toggle })}>
-        <nav className={styles.navBar}>
-          <NavLink to="/" activeClassName={styles.navItemActive} className={styles.navItem}>
-            ニュース
-          </NavLink>
-          <NavLink to="2" activeClassName={styles.navItemActive} className={styles.navItem}>
-            スケジュール
-          </NavLink>
-          <NavLink to="3" activeClassName={styles.navItemActive} className={styles.navItem}>
-            メンバー
-          </NavLink>
-          <NavLink to="4" activeClassName={styles.navItemActive} className={styles.navItem}>
-            プロデューサー
-          </NavLink>
-          <NavLink to="5" activeClassName={styles.navItemActive} className={styles.navItem}>
-            ディスコグラフィー
-          </NavLink>
-        </nav>
-        <span className={styles.closeNav} role="button" tabIndex={0} onKeyDown={null} onClick={() => setToggle(false)}>
-          <FiX />
-        </span>
-      </div>
-      <Button className={styles.locale}>
-        <img src={flagEn} alt="EN" />
-        <span>EN</span>
-        <FiChevronDown />
-      </Button>
-      <Button
-        onClick={() => setToggle(true)}
-        className={clsx(styles.buttonToggle, { [styles.buttonToggleActive]: toggle })}
-      >
-        <span className={styles.buttonToggleBar} />
-        <span className={styles.buttonToggleBar} />
-        <span className={styles.buttonToggleBar} />
-      </Button>
-    </div>
+    </>
+
   );
 }
 

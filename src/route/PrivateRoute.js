@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
 import { Redirect, Route } from 'react-router-dom';
 
-import Layout from './components/Layout';
-import useAuth from './hooks/useAuth';
+import Layout from '../components/Layout';
+import useAuth from '../hooks/useAuth';
 
 const PrivateRouter = ({ children, noLayout = false, ...rest }) => {
   const {hasLogin} = useAuth();
