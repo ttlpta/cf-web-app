@@ -47,9 +47,7 @@ const TopPage = () => {
   );
   const { data: newsData, isSuccess: isGetNewsDataSuccess } = useGetCampaignsQuery(getNewsQueryParams);
 
-  const { data: profileData, isSuccess: isGetProfileDataSuccess } = useGetTopPageProfileQuery({
-    login_id: 'ha.hoang.thi+8@bluebelt.asia',
-  });
+  const { data: profileData, isSuccess: isGetProfileDataSuccess } = useGetTopPageProfileQuery();
 
   const { data: scheduleData, isSuccess: isGetScheduleDataSuccess } = useGetSchedulesQuery({
     month: currentDateInMillisecond,
