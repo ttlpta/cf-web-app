@@ -9,7 +9,7 @@ const API = {
     CAMPAIGNS: `${COMPANY_SERVICE}/campaigns`,
     CAMPAIGN: (id) => `${COMPANY_SERVICE}/campaign/${id}`,
     BANNERS: `${COMPANY_SERVICE}/banners`,
-    PROFILE: `${COMPANY_SERVICE}/artist/1`
+    PROFILE: `${COMPANY_SERVICE}/artist-info/1`
   },
 };
 
