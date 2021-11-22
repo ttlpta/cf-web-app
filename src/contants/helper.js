@@ -1,4 +1,4 @@
-const { SCHEDULE_TYPE, NEW_CATEGORIES } = require('./config');
+const { SCHEDULE_TYPE, NEW_CATEGORIES, BLOOD_TYPE_VALUE } = require('./config');
 
 export const renderScheduleTypeLabel = (scheduleType) => {
   switch (scheduleType) {
@@ -14,7 +14,7 @@ export const renderScheduleTypeLabel = (scheduleType) => {
       return 'OTHERS';
     default:
       return '';
-  } 
+  }
 };
 
 export const renderScheduleTypeIcon = (scheduleType) => {
@@ -31,10 +31,8 @@ export const renderScheduleTypeIcon = (scheduleType) => {
       return 'icon-shake-hand';
     default:
       return '';
-  } 
+  }
 };
-
-
 
 export const renderNewsIcon = (category) => {
   switch (category) {
@@ -47,3 +45,17 @@ export const renderNewsIcon = (category) => {
   }
 };
 
+export const renderBloodType = (bloodType) => {
+  switch (bloodType) {
+    case BLOOD_TYPE_VALUE.A:
+      return 'A';
+    case BLOOD_TYPE_VALUE.B:
+      return 'B';
+    case BLOOD_TYPE_VALUE.O:
+      return 'O';
+    case BLOOD_TYPE_VALUE.AB:
+      return 'AB';
+    default:
+      return '';
+  }
+};

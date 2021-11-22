@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 import Layout from '../components/Layout';
 import Breadcrumb from '../components/Breadcrumb';
@@ -11,6 +11,8 @@ import SocialShare from '../components/SocialShare';
 
 export default function NewDetail() {
   const { id } = useParams();
+  const history = useHistory();
+
   const currentUrl = window.location.href;
 
   const { data: newDetailData, isSuccess: isGetScheduleDetailDataSuccess } = useGetCampaignQuery(id);
@@ -41,13 +43,13 @@ export default function NewDetail() {
             <div className="detail__content">
               <div dangerouslySetInnerHTML={{ __html: content }} />
               <img src={image} alt="Img" />
-              <SocialShare url={currentUrl} />
+              {/* <SocialShare url={currentUrl} /> */}
               <div className="detail__content__btn">
                 <Button>Click here to purchase</Button>
               </div>
             </div>
             <div className="detail__footer">
-              <Button className="detail__footer__btn">Back to news list</Button>
+              <Button className="detail__footer__btn" onClick={() => history.push(PATH.NEW.LIST)}>Back to news list</Button>
             </div>
           </div>
           <div className="new__detail__related">

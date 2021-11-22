@@ -14,7 +14,7 @@ import {
   useGetTopPageProfileQuery,
 } from '../services/CompanyService';
 import { userProfileSelector } from '../redux/slices/authSlice';
-import { renderNewsIcon } from '../contants/helper';
+import { renderBloodType, renderNewsIcon } from '../contants/helper';
 import PATH from '../contants/path';
 
 // Need Spinner
@@ -120,18 +120,18 @@ const TopPage = () => {
       } = profileData?.data?.artist || {};
 
       const generalInfo = {
-        dob,
-        height,
-        city,
-        country,
-        blood_type,
-        hobby,
+        Date_of_birth: dob,
+        Height: `${height} cm`,
+        City: city,
+        Country: country,
+        Blood_group: renderBloodType(blood_type),
+        Hobby: hobby,
       };
 
       const renderGeneralInfo = () =>
         Object.keys(generalInfo).map((key) => (
           <div className="profile__info__item">
-            <p className="profile__info__item--title">{key}</p>
+            <p className="profile__info__item--title">{key.replaceAll('_', ' ')}</p>
             <p className="profile__info__item--content">{generalInfo[key]}</p>
           </div>
         ));
